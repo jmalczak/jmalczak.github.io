@@ -1,31 +1,31 @@
 title:            blog.malczak.net
 description:      "Developer's point of view."
 logo:             logo.png
-disqus_shortname: jakubmalczak
+disqus_shortname: blogmalczaknet
 share:            true
 dropcap:			true
 # Change url to your domain. Leave localhost server or blank when working locally.
 # or use the hint from http://jekyllrb.com/docs/github-pages/ to keep this the same 
 # whether working locally or remotely. Start Jekyll with: jekyll serve --baseurl ''
-url:        	  http://blog.malczak.net
+url:        	  http://localhost:4000
 
 # Owner/author information
 owner:
   name:           Jakub Malczak
-  #avatar:         avatar.jpg
+  avatar:         jm.jpg
   email:          jmalczak@gmail.com
   # Use the coder's toolbox at http://coderstoolbox.net/string/#!encoding=xml&action=encode&charset=us_ascii to encode your description into XML string
   description:    Jakub Malczak
   # Social networking links used in footer. Update and remove as you like.
   twitter:        jmalczak
-  facebook:       malczu  
-  github:         jmalczak      
+  facebook:       malczu
+  github:         jmalczak
 
 # Analytics and webmaster tools stuff goes here
 # google_analytics:   UA-39365944-7
-# google_verify:      
+# google_verify:
 # https://ssl.bing.com/webmaster/configure/verify/ownership Option 2 content= goes here
-# bing_verify:         
+# bing_verify:
 
 # Links to include in footer navigation
 # For external links add external: true
@@ -40,7 +40,7 @@ links:
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 timezone:    Europe/Warsaw
 future:      true
-highlighter: false
+highlighter: pygments
 markdown:    kramdown
 paginate:    5
 paginate_path: "page:num"
