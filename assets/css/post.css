@@ -424,24 +424,6 @@ body,
     padding-bottom: 3.75rem;
     background: #f2f2f2;
 }
-@media only screen and (min-width: 40.063em) {
-    .notepad-author-info {
-        padding-top: 5rem;
-        padding-bottom: 5rem;
-    }
-}
-@media only screen and (min-width: 70em) {
-    .notepad-author-info {
-        padding-top: 6.875rem;
-        padding-bottom: 6.875rem;
-    }
-}
-@media only screen and (min-width: 90em) {
-    .notepad-author-info {
-        padding-top: 7.5rem;
-        padding-bottom: 7.5rem;
-    }
-}
 .notepad-author-info .notepad-post-author {
     padding-left: 1.875rem;
     padding-right: 1.875rem;
