@@ -412,6 +412,16 @@ nav.pagination .newer-posts .fa {
 nav.pagination .older-posts .fa {
     margin-left: 0.625rem;
 }
+.notepad-page-wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -9.5em;
+}
+.footer,
+.push {
+    height: 9.5em;
+}
 .notepad-site-footer {
     background: black;
 }
