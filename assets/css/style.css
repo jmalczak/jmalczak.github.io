@@ -457,7 +457,7 @@ nav.pagination .older-posts .fa {
 .notepad-site-footer .social-icons {
     text-align: center;
     float: none;
-    padding-bottom: 3.75rem;
+    padding-bottom: 3rem;
 }
 .notepad-site-footer .social-icons a {
     color: black;
@@ -466,7 +466,7 @@ nav.pagination .older-posts .fa {
     .notepad-site-footer .social-icons,
     .notepad-site-footer .copyright {
         width: 49%;
-        padding: 5rem;
+        padding: 3rem;
     }
     .notepad-site-footer .copyright {
         text-align: left;
