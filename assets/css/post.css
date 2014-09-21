@@ -523,21 +523,6 @@ body,
         padding-bottom: 5.625rem;
     }
 }
-@media only screen and (min-width: 70em) {
-    .notepad-page-title h1,
-    .notepad-post-title-simple h1 {
-        padding-top: 6.875rem;
-        padding-bottom: 6.875rem;
-    }
-}
-@media only screen and (min-width: 90em) {
-    .notepad-page-title h1,
-    .notepad-post-title-simple h1 {
-        font-size: 5.3125rem;
-        padding-top: 8.125rem;
-        padding-bottom: 8.125rem;
-    }
-}
 .notepad-page-title .notepad-post-meta-simple,
 .notepad-post-title-simple .notepad-post-meta-simple {
     text-align: center;
