@@ -10,3 +10,4 @@ tags: [Jakub, Malczak, malczu]
 </figure>
 
 My name is Jakub Malczak, and I currently live and work in Lodz, Poland. This is my personal blog on which I write about anything, starting from my personal life and hobbies, ending on software development. 
+If you would like to get in touch, please drop me a line on Facebook, Github or Linked In.
