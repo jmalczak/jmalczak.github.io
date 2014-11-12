@@ -11,4 +11,9 @@ namespace :env do
   task :pro do
     edit_config 'url', 'http://malczak.net'
   end
-end 
+end
+
+desc 'Run jekyll server'
+task :run do
+	system("jekyll serve -w")
+end
