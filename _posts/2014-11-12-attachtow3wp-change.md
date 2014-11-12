@@ -5,6 +5,7 @@ description: Small improvement to AttachToW3WP project
 headline: 
 modified: 2014-11-12 07:24:34 +0100
 tags: ['w3wp', 'iis', '.net']
+category: programming
 comments: true
 featured: false
 ---
