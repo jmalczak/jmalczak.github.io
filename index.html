@@ -18,21 +18,19 @@ title: BLOG
             </span>
         </div>
         <div class="small-12 medium-9 large-10 columns">
-            <section class="notepad-post-excerpt">
-                <header class="notepad-post-header">
-                    <h3 class="notepad-post-title">
-                        <a href="{{ site.url }}{{ post.url }}">
-                            {{ post.title }}
-                        </a>
-                    </h3>
-                </header>
-                <p>{{ post.content | strip_html | truncatewords:40 }}</p>
-            </section>
-            
-                <div class="notepad-index-post-tags">
-                {% for tag in post.categories %}<a href="{{ site.url }}/categories/index.html#{{ post.categories | cgi_encode }}" title="Other posts from the {{ tag | capitalize }} category">{{ tag | capitalize }}</a>{% unless forloop.last %}&nbsp;{% endunless %}{% endfor %}
-                    
-                </div>                        
+            <header class="notepad-post-header">
+                <h3 class="notepad-post-title">
+                    <a href="{{ site.url }}{{ post.url }}">
+                        {{ post.title }}
+                    </a>
+                </h3>
+            </header>
+            <p>{{ post.content | strip_html | truncatewords:40 }}</p>
+        
+            <div class="notepad-index-post-tags">
+            {% for tag in post.categories %}<a href="{{ site.url }}/categories/index.html#{{ post.categories | cgi_encode }}" title="Other posts from the {{ tag | capitalize }} category">{{ tag | capitalize }}</a>{% unless forloop.last %}&nbsp;{% endunless %}{% endfor %}
+                
+            </div>                        
         </div>
     </article>
 	{% endfor %}
