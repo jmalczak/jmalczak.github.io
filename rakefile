@@ -1,6 +1,10 @@
 require_relative "_deployment/include/util.rb"
 require_relative "_deployment/include/post.rb"
 
+task :default do
+	system('rake -T')
+end
+
 namespace :env do
   desc 'Sets the configuration for development mode.'
   task :dev do
