@@ -439,8 +439,8 @@ nav.pagination .older-posts .fa {
     float: none;
     text-align: center;
     font-size: 0.8125rem;
-    padding-top: 3.75rem;
     padding-bottom: 1.25rem;
+    padding-top: 4rem;
 }
 .notepad-site-footer .copyright a {
     color: white;
@@ -448,24 +448,22 @@ nav.pagination .older-posts .fa {
 .notepad-site-footer .social-icons {
     text-align: center;
     float: none;
-    padding-bottom: 3rem;
 }
 .notepad-site-footer .social-icons a {
     color: black;
 }
 @media only screen and (min-width: 70em) {
-    .notepad-site-footer .social-icons,
-    .notepad-site-footer .copyright {
+    .notepad-site-footer .social-icons {
         width: 49%;
         padding: 3rem;
-    }
-    .notepad-site-footer .copyright {
-        text-align: left;
-        float: left;
-    }
-    .notepad-site-footer .social-icons {
         text-align: right;
         float: right;
+    }
+
+    .notepad-site-footer .copyright {
+        width: 49%;
+        text-align: left;
+        float: left;
     }
 }
 .fadeInDown {
