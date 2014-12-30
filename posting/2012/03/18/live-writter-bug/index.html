@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link type="text/plain" rel="author" href="/humans.txt" />
     <link rel="stylesheet" href="/css/main.c790.css"/>
-    <script data-main="/js/main.e00e" src="/_bower_components/requirejs/require.js"></script>
+    <script data-main="/js/main.a8b2" src="/_bower_components/requirejs/require.js"></script>
   </head>
   <body>
     <div class="page-content">
@@ -53,13 +53,11 @@ Finally I have managed to find a solution to my problems. At a first sight it di
 For some reason Wordpress sends incorrect response length during invocation of getUserBlogs method. The way to fix it is to edit class-IXR.php file, located under wp-includes. 
 You have to locate following line:</p>
 
-<div class="highlight"><pre><code class="html"> header(<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;str&quot;</span><span class="nt">&gt;</span>&#39;Content-Length: &#39;<span class="nt">&lt;/span&gt;</span>.$length); 
-</code></pre></div>
+<div class="highlight"><pre><code class="language-html" data-lang="html">header(<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;str&quot;</span><span class="nt">&gt;</span>&#39;Content-Length: &#39;<span class="nt">&lt;/span&gt;</span>.$length);</code></pre></div>
 
 <p>and replace it with:</p>
 
-<div class="highlight"><pre><code class="html"> header(<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;str&quot;</span><span class="nt">&gt;</span>&#39;Content-Length: &#39;<span class="nt">&lt;/span&gt;</span>.$length + 2); 
-</code></pre></div>
+<div class="highlight"><pre><code class="language-html" data-lang="html">header(<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;str&quot;</span><span class="nt">&gt;</span>&#39;Content-Length: &#39;<span class="nt">&lt;/span&gt;</span>.$length + 2);</code></pre></div>
 
 <p>This small change fix the problem and let you use Windows Live Writer to publish your posts.</p>
 
