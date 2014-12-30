@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+<title type="text"></title>
+<generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
+<link rel="self" type="application/atom+xml" href="put_proper_url/feed.xml" />
+<link rel="alternate" type="text/html" href="put_proper_url/" />
+<updated>2014-12-30T11:59:41+01:00</updated>
+<id>put_proper_url/</id>
+<author>
+  <name></name>
+  <uri>put_proper_url/</uri>
+  <email></email>
+</author>
+
+
+<entry>
+  <title type="html"><![CDATA[Process killer.]]></title>
+  <link rel="alternate" type="text/html" href="put_proper_url/programming/2014/11/15/process-killer/"/>
+  <id>put_proper_url/programming/2014/11/15/process-killer</id>
+  <published>2014-11-15T00:00:00+01:00</published>
+  <updated>2014-11-15 09:24:30 UTCT00:00:00-00:00</updated>
+  
+  <author>
+    <name></name>
+    <uri>put_proper_url</uri>
+    <email></email>
+  </author>
+  
+  <content type="html">
+  
+    &lt;p&gt;I had some issues with my Elan Microelectronics notebook touchpad after upgrade to Windows 8. I have downloaded drivers for my old Samsung QX-410 notebook from original Samsung homepage. Unfortunately last supported operating system is Windows 7, so I had not much choice but use those drivers. Apparently they work fine for most of the time, bu sometimes ETDCtrl process show new unclickable, hidden window which is visible on taskbar. One way to get rid of it, is to kill ETDCtrl process. I have created small application to monitor list of processes and when specific process will be fired, application will kill it instantly. You can find source code and binaries on GitHub : &lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/jmalczak/ProcessKiller&quot;&gt;Process Killer&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;One way to run it, is from Windows auto start. Just type Win + R and paste following line for Windows 8:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;powershell&quot;&gt; &lt;span class=&quot;n&quot;&gt;AppData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;%\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Microsoft&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Windows&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Start&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Menu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Programs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Startup&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;and paste shortcut to Process Killer application. Next open up ProcessList.txt to configure processes to kill. Configuration file consist of list of processes. Each process name is in separate line:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ini&quot;&gt;&lt;span class=&quot;err&quot;&gt;totalcmd&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;totalcmd&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;;12&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You can also specify delay in seconds after which Process Killer will start killing certain tasks. To close application itself, double click it&amp;#39;s tray icon.&lt;/p&gt;
+
+  
+  &lt;p&gt;&lt;a href=&quot;put_proper_url/programming/2014/11/15/process-killer/&quot;&gt;Process killer.&lt;/a&gt; was originally published by  at &lt;a href=&quot;put_proper_url&quot;&gt;&lt;/a&gt; on November 15, 2014.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[AttachToW3WP improvement.]]></title>
+  <link rel="alternate" type="text/html" href="put_proper_url/programming/2014/11/12/attachtow3wp-change/"/>
+  <id>put_proper_url/programming/2014/11/12/attachtow3wp-change</id>
+  <published>2014-11-12T00:00:00+01:00</published>
+  <updated>2014-11-12 06:24:34 UTCT00:00:00-00:00</updated>
+  
+  <author>
+    <name></name>
+    <uri>put_proper_url</uri>
+    <email></email>
+  </author>
+  <category scheme="put_proper_url/tags/#w3wp" term="w3wp" /><category scheme="put_proper_url/tags/#iis" term="iis" /><category scheme="put_proper_url/tags/#.net" term=".net" />
+  <content type="html">
+  
+    &lt;p&gt;There is very cool Visual Studio extension available in Visual Studio Gallery. It&amp;#39;s called AttachToW3WP, you can grab it &lt;a href=&quot;https://visualstudiogallery.msdn.microsoft.com/14b2a959-446f-406c-bcf0-abe87fc529e7&quot;&gt;here&lt;/a&gt;. What it does is, it allows you to attach visual studio debugger process to IIS worker process for debugging purposes. You can do all those steps manually, by using Debug -&amp;gt; Attach To menu, but it&amp;#39;s just much more convenient to have just one button to do that. You can also assign keyboard shortcut for Attach To action. One minor drawback is that it opens up default browser, just after it attach to w3wp process. This is not something I have wanted, since I usually work with browser already open. I have pulled code from GitHub repo, and made small change to do not pop up browser after it is attached. If you prefer this behavior, you can find my code here &lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/jmalczak/AttachToW3WP&quot;&gt;AttachToW3WP on GitHub&lt;/a&gt;. &lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Already compiled binnary is also available here &lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/jmalczak/AttachToW3WP/raw/master/Binnaries/AttachToW3WP.vsix&quot;&gt;AttachToW3WP.vsix&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+  
+  &lt;p&gt;&lt;a href=&quot;put_proper_url/programming/2014/11/12/attachtow3wp-change/&quot;&gt;AttachToW3WP improvement.&lt;/a&gt; was originally published by  at &lt;a href=&quot;put_proper_url&quot;&gt;&lt;/a&gt; on November 12, 2014.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[SQL Server Analysis Services and duplicate attribute key problem.]]></title>
+  <link rel="alternate" type="text/html" href="put_proper_url/programming/2012/08/15/ssas-attribute/"/>
+  <id>put_proper_url/programming/2012/08/15/ssas-attribute</id>
+  <published>2012-08-15T00:00:00+02:00</published>
+  <updated>2012-08-15T00:00:00+02:00</updated>
+  <author>
+    <name></name>
+    <uri>put_proper_url</uri>
+    <email></email>
+  </author>
+  <category scheme="put_proper_url/tags/#ssas" term="ssas" /><category scheme="put_proper_url/tags/#programming" term="programming" /><category scheme="put_proper_url/tags/#sql" term="sql" />
+  <content type="html">
+  
+    &lt;p&gt;I have been struggling lately with attribute definition for our small analysis project. 
+I got duplicate attribute key error, and was confused about it since all queries executed by SSAS were distinct. 
+I have found this great article which explains how this is possible. If you have this problem, it&amp;#39;s worth reading:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;http://ms-olap.blogspot.com/2009/11/duplicate-attribute-key-has-been-found.html&quot; title=&quot;ms-olap blog&quot;&gt;http://ms-olap.blogspot.com/2009/11/duplicate-attribute-key-has-been-found.html&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+  
+  &lt;p&gt;&lt;a href=&quot;put_proper_url/programming/2012/08/15/ssas-attribute/&quot;&gt;SQL Server Analysis Services and duplicate attribute key problem.&lt;/a&gt; was originally published by  at &lt;a href=&quot;put_proper_url&quot;&gt;&lt;/a&gt; on August 15, 2012.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Wordpress 3.2.1 and Windows Live Writter bug.]]></title>
+  <link rel="alternate" type="text/html" href="put_proper_url/posting/2012/03/18/live-writter-bug/"/>
+  <id>put_proper_url/posting/2012/03/18/live-writter-bug</id>
+  <published>2012-03-18T00:00:00+01:00</published>
+  <updated>2012-03-18T00:00:00+01:00</updated>
+  <author>
+    <name></name>
+    <uri>put_proper_url</uri>
+    <email></email>
+  </author>
+  <category scheme="put_proper_url/tags/#post" term="post" /><category scheme="put_proper_url/tags/#live%20writter" term="live writter" /><category scheme="put_proper_url/tags/#bug" term="bug" /><category scheme="put_proper_url/tags/#posting" term="posting" />
+  <content type="html">
+  
+    &lt;p&gt;Lately I was trying to configure Wordpress 3.2.1 to work with Windows Live Writer. 
+If you don’t know Windows Live Writer yet, it is a part of Windows Live Essentials pack and it allow you to publish blog posts using Plain Old Desktop Application (I love acronyms! and PODA sounds quite cool). &lt;/p&gt;
+
+&lt;h3&gt;Problem&lt;/h3&gt;
+
+&lt;p&gt;I have noticed that apparently something has been changed in either Wordpress or Live Writer since the standard way of adding new blog didn’t work. I was receiving following error:&lt;/p&gt;
+
+&lt;p&gt;“Invalid server response – The response to the blogger.getUserBlogs method received from the blog server was invalid”&lt;/p&gt;
+
+&lt;h3&gt;Resolution&lt;/h3&gt;
+
+&lt;p&gt;I have been searching for a solution for a long time. I have seen so many different answers to that problem that it was actually difficult to try them all. 
+Finally I have managed to find a solution to my problems. At a first sight it didn’t look as it should fix the problem, but it did. 
+For some reason Wordpress sends incorrect response length during invocation of getUserBlogs method. The way to fix it is to edit class-IXR.php file, located under wp-includes. 
+You have to locate following line:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt; header(&lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;str&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&amp;#39;Content-Length: &amp;#39;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;.$length); 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;and replace it with:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt; header(&lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;str&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&amp;#39;Content-Length: &amp;#39;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;.$length + 2); 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This small change fix the problem and let you use Windows Live Writer to publish your posts.&lt;/p&gt;
+
+  
+  &lt;p&gt;&lt;a href=&quot;put_proper_url/posting/2012/03/18/live-writter-bug/&quot;&gt;Wordpress 3.2.1 and Windows Live Writter bug.&lt;/a&gt; was originally published by  at &lt;a href=&quot;put_proper_url&quot;&gt;&lt;/a&gt; on March 18, 2012.&lt;/p&gt;</content>
+</entry>
+
+</feed>

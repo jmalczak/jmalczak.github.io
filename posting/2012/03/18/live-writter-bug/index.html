@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Developer Abroad - Wordpress 3.2.1 and Windows Live Writter bug.</title>
+    <meta name="description" content="Developer Abroad technology and traveling blog.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/plain" rel="author" href="/humans.txt" />
+    <link rel="stylesheet" href="/css/main.c790.css"/>
+    <script data-main="/js/main.e00e" src="/_bower_components/requirejs/require.js"></script>
+  </head>
+  <body>
+    <div class="page-content">
+    <nav class="top" id="menu-mobile-open" >
+    <div class="menu-mobile-toggle">
+        <a href="#menu-mobile-open" class="menu-mobile-open"><span><i class="fa fa-bars"></i></span></a>
+        <a id="menu-mobile-close" href="#menu-mobile-close" class="menu-mobile-close"><span><i class="fa fa-times"></i></span></a>
+    </div>
+    <ul class="navbar">
+        <li><a href="put_proper_url">Home</a></li>
+        <li><a href="put_proper_url/about/">About</a></li>
+        <li><a href="/feed.xml">Feed</a></li>
+    </ul>
+    <div class="clearfix"></div>
+</nav>
+    <div class="container">
+        <div>
+    <h1>Wordpress 3.2.1 and Windows Live Writter bug.</h1>
+    <p>by <strong>Jakub Malczak</strong> &#8212;
+    
+    on 
+    <a href="put_proper_url/tags/index.html#post" data-toggle="tooltip" title="Posts tagged with post" rel="tag">post</a>, 
+    <a href="put_proper_url/tags/index.html#live writter" data-toggle="tooltip" title="Posts tagged with live writter" rel="tag">live writter</a>, 
+    <a href="put_proper_url/tags/index.html#bug" data-toggle="tooltip" title="Posts tagged with bug" rel="tag">bug</a>, 
+    <a href="put_proper_url/tags/index.html#posting" data-toggle="tooltip" title="Posts tagged with posting" rel="tag">posting</a> <strong><time datetime="2012-03-18T00:00:00+01:00">18 Mar 2012</time></strong>
+    </p>
+</div>
+<div>
+    <p>Lately I was trying to configure Wordpress 3.2.1 to work with Windows Live Writer. 
+If you don’t know Windows Live Writer yet, it is a part of Windows Live Essentials pack and it allow you to publish blog posts using Plain Old Desktop Application (I love acronyms! and PODA sounds quite cool). </p>
+
+<h3>Problem</h3>
+
+<p>I have noticed that apparently something has been changed in either Wordpress or Live Writer since the standard way of adding new blog didn’t work. I was receiving following error:</p>
+
+<p>“Invalid server response – The response to the blogger.getUserBlogs method received from the blog server was invalid”</p>
+
+<h3>Resolution</h3>
+
+<p>I have been searching for a solution for a long time. I have seen so many different answers to that problem that it was actually difficult to try them all. 
+Finally I have managed to find a solution to my problems. At a first sight it didn’t look as it should fix the problem, but it did. 
+For some reason Wordpress sends incorrect response length during invocation of getUserBlogs method. The way to fix it is to edit class-IXR.php file, located under wp-includes. 
+You have to locate following line:</p>
+
+<div class="highlight"><pre><code class="html"> header(<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;str&quot;</span><span class="nt">&gt;</span>&#39;Content-Length: &#39;<span class="nt">&lt;/span&gt;</span>.$length); 
+</code></pre></div>
+
+<p>and replace it with:</p>
+
+<div class="highlight"><pre><code class="html"> header(<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;str&quot;</span><span class="nt">&gt;</span>&#39;Content-Length: &#39;<span class="nt">&lt;/span&gt;</span>.$length + 2); 
+</code></pre></div>
+
+<p>This small change fix the problem and let you use Windows Live Writer to publish your posts.</p>
+
+</div>
+
+<div>
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_shortname = 'blogmalczaknet'; 
+    (function () {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    (function () {
+        var s = document.createElement('script');
+        s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+</div>
+
+    </div>
+</div>
+    <footer class="footer">
+    <div class="copyright">
+        Proudly published with <a class="icon-ghost" href="http://jekyllrb.com/">Jekyll, Grunt, RequireJs and many more.</a>
+    </div>
+    <div class="social-icons">
+        
+        <a href="http://twitter.com/malczu">
+        <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fa fa-twitter fa-stack-1x"></i>
+        </span>
+        </a>
+           
+        <a href="http://github.com/jmalczak">
+        <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fa fa-github fa-stack-1x"></i>
+        </span>
+        </a>
+         
+        <a href="http://facebook.com/malczu">
+        <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fa fa-facebook fa-stack-1x"></i>
+        </span>
+        </a>
+         
+        <a href="https://www.linkedin.com/in/jakubmalczak">
+        <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fa fa-linkedin fa-stack-1x"></i>
+        </span>
+        </a>
+        
+    </div>
+    <div class="clearfix"></div>
+</footer>
+
+    
+      <script>
+  (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+  function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+  e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+  e.src='//www.google-analytics.com/analytics.js';
+  r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+  ga('create','none');ga('send','pageview');
+</script>
+
+    
+  </body>
+</html>

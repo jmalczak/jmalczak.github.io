@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Developer Abroad - Process killer.</title>
+    <meta name="description" content="Developer Abroad technology and traveling blog.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/plain" rel="author" href="/humans.txt" />
+    <link rel="stylesheet" href="/css/main.c790.css"/>
+    <script data-main="/js/main.e00e" src="/_bower_components/requirejs/require.js"></script>
+  </head>
+  <body>
+    <div class="page-content">
+    <nav class="top" id="menu-mobile-open" >
+    <div class="menu-mobile-toggle">
+        <a href="#menu-mobile-open" class="menu-mobile-open"><span><i class="fa fa-bars"></i></span></a>
+        <a id="menu-mobile-close" href="#menu-mobile-close" class="menu-mobile-close"><span><i class="fa fa-times"></i></span></a>
+    </div>
+    <ul class="navbar">
+        <li><a href="put_proper_url">Home</a></li>
+        <li><a href="put_proper_url/about/">About</a></li>
+        <li><a href="/feed.xml">Feed</a></li>
+    </ul>
+    <div class="clearfix"></div>
+</nav>
+    <div class="container">
+        <div>
+    <h1>Process killer.</h1>
+    <p>by <strong>Jakub Malczak</strong> &#8212;
+    
+     <strong><time datetime="2014-11-15T00:00:00+01:00">15 Nov 2014</time></strong>
+    </p>
+</div>
+<div>
+    <p>I had some issues with my Elan Microelectronics notebook touchpad after upgrade to Windows 8. I have downloaded drivers for my old Samsung QX-410 notebook from original Samsung homepage. Unfortunately last supported operating system is Windows 7, so I had not much choice but use those drivers. Apparently they work fine for most of the time, bu sometimes ETDCtrl process show new unclickable, hidden window which is visible on taskbar. One way to get rid of it, is to kill ETDCtrl process. I have created small application to monitor list of processes and when specific process will be fired, application will kill it instantly. You can find source code and binaries on GitHub : </p>
+
+<blockquote>
+<p><a href="https://github.com/jmalczak/ProcessKiller">Process Killer</a></p>
+</blockquote>
+
+<p>One way to run it, is from Windows auto start. Just type Win + R and paste following line for Windows 8:</p>
+
+<div class="highlight"><pre><code class="powershell"> <span class="n">AppData</span><span class="p">%\</span><span class="n">Microsoft</span><span class="p">\</span><span class="n">Windows</span><span class="p">\</span><span class="n">Start</span> <span class="n">Menu</span><span class="p">\</span><span class="n">Programs</span><span class="p">\</span><span class="n">Startup</span> 
+</code></pre></div>
+
+<p>and paste shortcut to Process Killer application. Next open up ProcessList.txt to configure processes to kill. Configuration file consist of list of processes. Each process name is in separate line:</p>
+
+<div class="highlight"><pre><code class="ini"><span class="err">totalcmd</span>
+<span class="err">totalcmd</span><span class="c1">;12</span>
+</code></pre></div>
+
+<p>You can also specify delay in seconds after which Process Killer will start killing certain tasks. To close application itself, double click it&#39;s tray icon.</p>
+
+</div>
+
+<div>
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_shortname = 'blogmalczaknet'; 
+    (function () {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    (function () {
+        var s = document.createElement('script');
+        s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+</div>
+
+    </div>
+</div>
+    <footer class="footer">
+    <div class="copyright">
+        Proudly published with <a class="icon-ghost" href="http://jekyllrb.com/">Jekyll, Grunt, RequireJs and many more.</a>
+    </div>
+    <div class="social-icons">
+        
+        <a href="http://twitter.com/malczu">
+        <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fa fa-twitter fa-stack-1x"></i>
+        </span>
+        </a>
+           
+        <a href="http://github.com/jmalczak">
+        <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fa fa-github fa-stack-1x"></i>
+        </span>
+        </a>
+         
+        <a href="http://facebook.com/malczu">
+        <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fa fa-facebook fa-stack-1x"></i>
+        </span>
+        </a>
+         
+        <a href="https://www.linkedin.com/in/jakubmalczak">
+        <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fa fa-linkedin fa-stack-1x"></i>
+        </span>
+        </a>
+        
+    </div>
+    <div class="clearfix"></div>
+</footer>
+
+    
+      <script>
+  (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+  function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+  e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+  e.src='//www.google-analytics.com/analytics.js';
+  r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+  ga('create','none');ga('send','pageview');
+</script>
+
+    
+  </body>
+</html>
