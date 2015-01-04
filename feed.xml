@@ -4,7 +4,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://developerabroad.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://developerabroad.com/" />
-<updated>2015-01-04T14:09:52+01:00</updated>
+<updated>2015-01-04T14:19:23+01:00</updated>
 <id>http://developerabroad.com/</id>
 <author>
   <name></name>
@@ -18,8 +18,7 @@
   <link rel="alternate" type="text/html" href="http://developerabroad.com/programming/2014/11/15/process-killer/"/>
   <id>http://developerabroad.com/programming/2014/11/15/process-killer</id>
   <published>2014-11-15T00:00:00+01:00</published>
-  <updated>2014-11-15 10:24:30 +0100T00:00:00-00:00</updated>
-  
+  <updated>2014-11-15T00:00:00+01:00</updated>
   <author>
     <name></name>
     <uri>http://developerabroad.com</uri>
@@ -55,14 +54,13 @@
   <link rel="alternate" type="text/html" href="http://developerabroad.com/programming/2014/11/12/attachtow3wp-change/"/>
   <id>http://developerabroad.com/programming/2014/11/12/attachtow3wp-change</id>
   <published>2014-11-12T00:00:00+01:00</published>
-  <updated>2014-11-12 07:24:34 +0100T00:00:00-00:00</updated>
-  
+  <updated>2014-11-12T00:00:00+01:00</updated>
   <author>
     <name></name>
     <uri>http://developerabroad.com</uri>
     <email></email>
   </author>
-  <category scheme="http://developerabroad.com/tags/#w3wp" term="w3wp" /><category scheme="http://developerabroad.com/tags/#iis" term="iis" /><category scheme="http://developerabroad.com/tags/#.net" term=".net" />
+  
   <content type="html">
   
     &lt;p&gt;There is very cool Visual Studio extension available in Visual Studio Gallery. It&amp;#39;s called AttachToW3WP, you can grab it &lt;a href=&quot;https://visualstudiogallery.msdn.microsoft.com/14b2a959-446f-406c-bcf0-abe87fc529e7&quot;&gt;here&lt;/a&gt;. What it does is, it allows you to attach visual studio debugger process to IIS worker process for debugging purposes. You can do all those steps manually, by using Debug -&amp;gt; Attach To menu, but it&amp;#39;s just much more convenient to have just one button to do that. You can also assign keyboard shortcut for Attach To action. One minor drawback is that it opens up default browser, just after it attach to w3wp process. This is not something I have wanted, since I usually work with browser already open. I have pulled code from GitHub repo, and made small change to do not pop up browser after it is attached. If you prefer this behavior, you can find my code here &lt;/p&gt;
@@ -93,7 +91,7 @@
     <uri>http://developerabroad.com</uri>
     <email></email>
   </author>
-  <category scheme="http://developerabroad.com/tags/#ssas" term="ssas" /><category scheme="http://developerabroad.com/tags/#programming" term="programming" /><category scheme="http://developerabroad.com/tags/#sql" term="sql" />
+  
   <content type="html">
   
     &lt;p&gt;I have been struggling lately with attribute definition for our small analysis project. 
@@ -120,7 +118,7 @@ I have found this great article which explains how this is possible. If you have
     <uri>http://developerabroad.com</uri>
     <email></email>
   </author>
-  <category scheme="http://developerabroad.com/tags/#post" term="post" /><category scheme="http://developerabroad.com/tags/#live%20writter" term="live writter" /><category scheme="http://developerabroad.com/tags/#bug" term="bug" /><category scheme="http://developerabroad.com/tags/#posting" term="posting" />
+  
   <content type="html">
   
     &lt;p&gt;Lately I was trying to configure Wordpress 3.2.1 to work with Windows Live Writer. 
