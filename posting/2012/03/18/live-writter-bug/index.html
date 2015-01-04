@@ -18,7 +18,7 @@
     -->
   </head>
   <body>
-    <div class="page-content">
+    <main class="page-content">
     <nav class="top" id="menu-mobile-open" >
     <div class="menu-mobile-toggle">
         <a href="#menu-mobile-open" class="menu-mobile-open"><span><i class="fa fa-bars"></i></span></a>
@@ -32,19 +32,22 @@
     <div class="clearfix"></div>
 </nav>
     <div class="container">
+        <article>
+    <header>
         <div>
-    <h1>Wordpress 3.2.1 and Windows Live Writter bug.</h1>
-    <p>by <strong>Jakub Malczak</strong> &#8212;
-    
-    on 
-    <a href="http://developerabroad.com/tags/index.html#post" data-toggle="tooltip" title="Posts tagged with post" rel="tag">post</a>, 
-    <a href="http://developerabroad.com/tags/index.html#live writter" data-toggle="tooltip" title="Posts tagged with live writter" rel="tag">live writter</a>, 
-    <a href="http://developerabroad.com/tags/index.html#bug" data-toggle="tooltip" title="Posts tagged with bug" rel="tag">bug</a>, 
-    <a href="http://developerabroad.com/tags/index.html#posting" data-toggle="tooltip" title="Posts tagged with posting" rel="tag">posting</a> <strong><time datetime="2012-03-18T00:00:00+01:00">18 Mar 2012</time></strong>
-    </p>
-</div>
-<div>
-    <p>Lately I was trying to configure Wordpress 3.2.1 to work with Windows Live Writer. 
+            <h1>Wordpress 3.2.1 and Windows Live Writter bug.</h1>
+            <p>by <strong>Jakub Malczak</strong> &#8212;
+            
+            on 
+            <a href="http://developerabroad.com/tags/index.html#post" data-toggle="tooltip" title="Posts tagged with post" rel="tag">post</a>, 
+            <a href="http://developerabroad.com/tags/index.html#live writter" data-toggle="tooltip" title="Posts tagged with live writter" rel="tag">live writter</a>, 
+            <a href="http://developerabroad.com/tags/index.html#bug" data-toggle="tooltip" title="Posts tagged with bug" rel="tag">bug</a>, 
+            <a href="http://developerabroad.com/tags/index.html#posting" data-toggle="tooltip" title="Posts tagged with posting" rel="tag">posting</a> <strong><time datetime="2012-03-18T00:00:00+01:00">18 Mar 2012</time></strong>
+            </p>
+        </div>
+    </header>
+    <div>
+        <p>Lately I was trying to configure Wordpress 3.2.1 to work with Windows Live Writer. 
 If you don’t know Windows Live Writer yet, it is a part of Windows Live Essentials pack and it allow you to publish blog posts using Plain Old Desktop Application (I love acronyms! and PODA sounds quite cool). </p>
 
 <h3>Problem</h3>
@@ -68,7 +71,8 @@ You have to locate following line:</p>
 
 <p>This small change fix the problem and let you use Windows Live Writer to publish your posts.</p>
 
-</div>
+    </div>
+</article>
 
 <div>
     <h2>Comments</h2>
@@ -96,7 +100,7 @@ You have to locate following line:</p>
 </div>
 
     </div>
-</div>
+</main>
     <footer class="footer">
     <div class="copyright">
         Proudly published with <a class="icon-ghost" href="http://jekyllrb.com/">Jekyll, Grunt, RequireJs and many more.</a>

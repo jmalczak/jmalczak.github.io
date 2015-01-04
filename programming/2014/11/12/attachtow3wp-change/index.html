@@ -18,7 +18,7 @@
     -->
   </head>
   <body>
-    <div class="page-content">
+    <main class="page-content">
     <nav class="top" id="menu-mobile-open" >
     <div class="menu-mobile-toggle">
         <a href="#menu-mobile-open" class="menu-mobile-open"><span><i class="fa fa-bars"></i></span></a>
@@ -32,18 +32,21 @@
     <div class="clearfix"></div>
 </nav>
     <div class="container">
+        <article>
+    <header>
         <div>
-    <h1>AttachToW3WP improvement.</h1>
-    <p>by <strong>Jakub Malczak</strong> &#8212;
-    
-    on 
-    <a href="http://developerabroad.com/tags/index.html#w3wp" data-toggle="tooltip" title="Posts tagged with w3wp" rel="tag">w3wp</a>, 
-    <a href="http://developerabroad.com/tags/index.html#iis" data-toggle="tooltip" title="Posts tagged with iis" rel="tag">iis</a>, 
-    <a href="http://developerabroad.com/tags/index.html#.net" data-toggle="tooltip" title="Posts tagged with .net" rel="tag">.net</a> <strong><time datetime="2014-11-12T00:00:00+01:00">12 Nov 2014</time></strong>
-    </p>
-</div>
-<div>
-    <p>There is very cool Visual Studio extension available in Visual Studio Gallery. It&#39;s called AttachToW3WP, you can grab it <a href="https://visualstudiogallery.msdn.microsoft.com/14b2a959-446f-406c-bcf0-abe87fc529e7">here</a>. What it does is, it allows you to attach visual studio debugger process to IIS worker process for debugging purposes. You can do all those steps manually, by using Debug -&gt; Attach To menu, but it&#39;s just much more convenient to have just one button to do that. You can also assign keyboard shortcut for Attach To action. One minor drawback is that it opens up default browser, just after it attach to w3wp process. This is not something I have wanted, since I usually work with browser already open. I have pulled code from GitHub repo, and made small change to do not pop up browser after it is attached. If you prefer this behavior, you can find my code here </p>
+            <h1>AttachToW3WP improvement.</h1>
+            <p>by <strong>Jakub Malczak</strong> &#8212;
+            
+            on 
+            <a href="http://developerabroad.com/tags/index.html#w3wp" data-toggle="tooltip" title="Posts tagged with w3wp" rel="tag">w3wp</a>, 
+            <a href="http://developerabroad.com/tags/index.html#iis" data-toggle="tooltip" title="Posts tagged with iis" rel="tag">iis</a>, 
+            <a href="http://developerabroad.com/tags/index.html#.net" data-toggle="tooltip" title="Posts tagged with .net" rel="tag">.net</a> <strong><time datetime="2014-11-12T00:00:00+01:00">12 Nov 2014</time></strong>
+            </p>
+        </div>
+    </header>
+    <div>
+        <p>There is very cool Visual Studio extension available in Visual Studio Gallery. It&#39;s called AttachToW3WP, you can grab it <a href="https://visualstudiogallery.msdn.microsoft.com/14b2a959-446f-406c-bcf0-abe87fc529e7">here</a>. What it does is, it allows you to attach visual studio debugger process to IIS worker process for debugging purposes. You can do all those steps manually, by using Debug -&gt; Attach To menu, but it&#39;s just much more convenient to have just one button to do that. You can also assign keyboard shortcut for Attach To action. One minor drawback is that it opens up default browser, just after it attach to w3wp process. This is not something I have wanted, since I usually work with browser already open. I have pulled code from GitHub repo, and made small change to do not pop up browser after it is attached. If you prefer this behavior, you can find my code here </p>
 
 <blockquote>
 <p><a href="https://github.com/jmalczak/AttachToW3WP">AttachToW3WP on GitHub</a>. </p>
@@ -55,7 +58,8 @@
 <p><a href="https://github.com/jmalczak/AttachToW3WP/raw/master/Binnaries/AttachToW3WP.vsix">AttachToW3WP.vsix</a>.</p>
 </blockquote>
 
-</div>
+    </div>
+</article>
 
 <div>
     <h2>Comments</h2>
@@ -83,7 +87,7 @@
 </div>
 
     </div>
-</div>
+</main>
     <footer class="footer">
     <div class="copyright">
         Proudly published with <a class="icon-ghost" href="http://jekyllrb.com/">Jekyll, Grunt, RequireJs and many more.</a>

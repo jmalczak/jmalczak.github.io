@@ -1,33 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Developer Abroad - </title>
-    <meta name="description" content="Developer Abroad technology and traveling blog.">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link type="text/plain" rel="author" href="/humans.txt" />
-    <!-- build:css(app) /css/main.css -->
-    <link rel="stylesheet" href="/_bower_components/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="/css/site.css">
-    <!-- endbuild -->
-    <script data-main="/js/main" src="/_bower_components/requirejs/require.js"></script>
-    <!--
-      Nice that someone is reading the markup. If you would like to hire me, or you need people for
-      any cool project. Please don't hesitate to contact me. To get my e-mail address, please open 
-      JavaScrip console and run function getDetails();
-
-      Best regards
-    -->
-  </head>
-  <body>
-    <?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
 <title type="text"></title>
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://developerabroad.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://developerabroad.com/" />
-<updated>2015-01-03T15:32:53+01:00</updated>
+<updated>2015-01-04T14:09:52+01:00</updated>
 <id>http://developerabroad.com/</id>
 <author>
   <name></name>
@@ -175,55 +152,3 @@ You have to locate following line:&lt;/p&gt;
 </entry>
 
 </feed>
-
-    <footer class="footer">
-    <div class="copyright">
-        Proudly published with <a class="icon-ghost" href="http://jekyllrb.com/">Jekyll, Grunt, RequireJs and many more.</a>
-    </div>
-    <div class="social-icons">
-        
-        <a href="http://twitter.com/malczu">
-        <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
-        <i class="fa fa-twitter fa-stack-1x"></i>
-        </span>
-        </a>
-           
-        <a href="http://github.com/jmalczak">
-        <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
-        <i class="fa fa-github fa-stack-1x"></i>
-        </span>
-        </a>
-         
-        <a href="http://facebook.com/malczu">
-        <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
-        <i class="fa fa-facebook fa-stack-1x"></i>
-        </span>
-        </a>
-         
-        <a href="https://www.linkedin.com/in/jakubmalczak">
-        <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
-        <i class="fa fa-linkedin fa-stack-1x"></i>
-        </span>
-        </a>
-        
-    </div>
-    <div class="clearfix"></div>
-</footer>
-
-    
-      <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-58175776-1', 'auto');
-  ga('send', 'pageview');
-</script>
-    
-  </body>
-</html>

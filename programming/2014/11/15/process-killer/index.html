@@ -18,7 +18,7 @@
     -->
   </head>
   <body>
-    <div class="page-content">
+    <main class="page-content">
     <nav class="top" id="menu-mobile-open" >
     <div class="menu-mobile-toggle">
         <a href="#menu-mobile-open" class="menu-mobile-open"><span><i class="fa fa-bars"></i></span></a>
@@ -32,15 +32,18 @@
     <div class="clearfix"></div>
 </nav>
     <div class="container">
+        <article>
+    <header>
         <div>
-    <h1>Process killer.</h1>
-    <p>by <strong>Jakub Malczak</strong> &#8212;
-    
-     <strong><time datetime="2014-11-15T00:00:00+01:00">15 Nov 2014</time></strong>
-    </p>
-</div>
-<div>
-    <p>I had some issues with my Elan Microelectronics notebook touchpad after upgrade to Windows 8. I have downloaded drivers for my old Samsung QX-410 notebook from original Samsung homepage. Unfortunately last supported operating system is Windows 7, so I had not much choice but use those drivers. Apparently they work fine for most of the time, bu sometimes ETDCtrl process show new unclickable, hidden window which is visible on taskbar. One way to get rid of it, is to kill ETDCtrl process. I have created small application to monitor list of processes and when specific process will be fired, application will kill it instantly. You can find source code and binaries on GitHub : </p>
+            <h1>Process killer.</h1>
+            <p>by <strong>Jakub Malczak</strong> &#8212;
+            
+             <strong><time datetime="2014-11-15T00:00:00+01:00">15 Nov 2014</time></strong>
+            </p>
+        </div>
+    </header>
+    <div>
+        <p>I had some issues with my Elan Microelectronics notebook touchpad after upgrade to Windows 8. I have downloaded drivers for my old Samsung QX-410 notebook from original Samsung homepage. Unfortunately last supported operating system is Windows 7, so I had not much choice but use those drivers. Apparently they work fine for most of the time, bu sometimes ETDCtrl process show new unclickable, hidden window which is visible on taskbar. One way to get rid of it, is to kill ETDCtrl process. I have created small application to monitor list of processes and when specific process will be fired, application will kill it instantly. You can find source code and binaries on GitHub : </p>
 
 <blockquote>
 <p><a href="https://github.com/jmalczak/ProcessKiller">Process Killer</a></p>
@@ -57,7 +60,8 @@
 
 <p>You can also specify delay in seconds after which Process Killer will start killing certain tasks. To close application itself, double click it&#39;s tray icon.</p>
 
-</div>
+    </div>
+</article>
 
 <div>
     <h2>Comments</h2>
@@ -85,7 +89,7 @@
 </div>
 
     </div>
-</div>
+</main>
     <footer class="footer">
     <div class="copyright">
         Proudly published with <a class="icon-ghost" href="http://jekyllrb.com/">Jekyll, Grunt, RequireJs and many more.</a>
