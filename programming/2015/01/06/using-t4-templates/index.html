@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Developer Abroad - Using T4 templates to generate C# dictionary from SQL table values.</title>
+    <meta name="description" content="How to use Microsoft T4 templating engine to generate C# dictionary classes from SQL table values." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link type="text/plain" rel="author" href="/humans.txt" />
+    <link rel="stylesheet" href="/css/main.46b1.css"/>
+    <script data-main="/js/main.de13" src="/_bower_components/requirejs/require.js"></script>
+    <!--
+      Nice that someone is reading the markup. If you would like to hire me, or you need people for
+      any cool project. Please don't hesitate to contact me. To get my e-mail address, please open 
+      JavaScrip console and run function getDetails();
+
+      Best regards
+    -->
+  </head>
+  <body>
+    <main class="page-content">
+    <nav class="top" id="menu-mobile-open" >
+    <div class="menu-mobile-toggle">
+        <a href="#menu-mobile-open" class="menu-mobile-open"><span><i class="fa fa-bars"></i></span></a>
+        <a id="menu-mobile-close" href="#menu-mobile-close" class="menu-mobile-close"><span><i class="fa fa-times"></i></span></a>
+    </div>
+    <ul class="navbar">
+        <li><a href="http://developerabroad.com">Home</a></li>
+        <li><a href="http://developerabroad.com/about/">About</a></li>
+        <li><a href="/feed.xml">Feed</a></li>
+    </ul>
+    <div class="clearfix"></div>
+</nav>
+    <div class="container">
+        <article>
+    <header>
+        <div>
+            <h1>Using T4 templates to generate C# dictionary from SQL table values.</h1>
+            <p>by <strong>Jakub Malczak</strong> &#8212;
+            
+             <strong><time datetime="2015-01-06T00:00:00+01:00">06 Jan 2015</time></strong>
+            </p>
+        </div>
+    </header>
+    <div>
+        <p>When you store your data in SQL relational database. It&#39;s always good to have your dictionary entries in database as well. Thanks to that you can keep referential integrity between your data. Let me show you an example. If we would like to model our User table following way:</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="k">User</span><span class="p">]</span> <span class="p">(</span>
+    <span class="p">[</span><span class="n">Id</span><span class="p">]</span>                   <span class="n">UNIQUEIDENTIFIER</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">Name</span><span class="p">]</span>                 <span class="n">NVARCHAR</span> <span class="p">(</span><span class="mi">256</span><span class="p">)</span>   <span class="k">NULL</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">StatusId</span><span class="p">]</span>             <span class="n">UNIQUEIDENTIFIER</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+<span class="p">)</span></code></pre></div>
+
+<p>As you can see, we have simple user with Id, Name and user status. Since status is just simple GUID, you can insert there whatever you want, except NULL. You probably have some kind of guard clause in your C# code which prevents you from inserting invalid data. But wouldn&#39;t be cool if we could use SQL referential integrity to make sure that data will be consistent, even if you would like to insert row manually? To do that, we can add another table called UserStatus:</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">UserStatus</span><span class="p">]</span> <span class="p">(</span>
+    <span class="p">[</span><span class="n">Id</span><span class="p">]</span>                   <span class="n">UNIQUEIDENTIFIER</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">Name</span><span class="p">]</span>                 <span class="n">NVARCHAR</span> <span class="p">(</span><span class="mi">256</span><span class="p">)</span>   <span class="k">NULL</span><span class="p">,</span>
+<span class="p">)</span></code></pre></div>
+
+<p>And now we can add foreign key from User to UserStatus table. This is done by adding following line to User table definition:</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">CONSTRAINT</span> <span class="p">[</span><span class="n">FK_dbo</span><span class="p">.</span><span class="n">User_dbo</span><span class="p">.</span><span class="n">UserStatus_StatusId</span><span class="p">]</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">([</span><span class="n">StatusId</span><span class="p">])</span> <span class="k">REFERENCES</span> <span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">UserStatus</span><span class="p">]([</span><span class="n">Id</span><span class="p">])</span></code></pre></div>
+
+<p>If you will try to insert new user with StatusId not in UserStatus table, you will receive error. Now everything is fine, but you have to keep 2 copies of user status, one in your C# code in form of enum or more complex dictionary class, and the second one in your database. It&#39;s often the case that those 2 copies are out of sync. To get rid of this problem we will keep only one copy of user statuses and we will generate C# class which will be used in our C# code. T4 template is just a perfect for this kind of a job. First of all, let&#39;s make sure that all user statuses are inserted into database table. To do this, we can create SQL post deployment script which will be used to add or edit statuses. Script can look like this:</p>
+
+<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">DECLARE</span> <span class="o">@</span><span class="n">Id</span> <span class="n">UNIQUEIDENTIFIER</span>
+<span class="k">SET</span> <span class="o">@</span><span class="n">Id</span> <span class="o">=</span> <span class="s1">&#39;B58100F1-B66B-4FC1-B9AC-37DE29FA3C08&#39;</span>
+
+<span class="n">IF</span> <span class="k">NOT</span> <span class="k">EXISTS</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">TOP</span> <span class="mi">1</span> <span class="mi">1</span> <span class="k">FROM</span> <span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">UserStatus</span><span class="p">]</span> <span class="k">WHERE</span> <span class="p">[</span><span class="n">Id</span><span class="p">]</span> <span class="o">=</span> <span class="o">@</span><span class="n">Id</span><span class="p">)</span>
+<span class="k">BEGIN</span>
+    <span class="k">INSERT</span> <span class="k">INTO</span> <span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">UserStatus</span><span class="p">](</span><span class="n">Id</span><span class="p">,</span> <span class="n">Name</span><span class="p">,</span> <span class="n">InsertDate</span><span class="p">,</span> <span class="n">InsertUser</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="o">@</span><span class="n">Id</span><span class="p">,</span> <span class="s1">&#39;New&#39;</span><span class="p">,</span> <span class="n">GETUTCDATE</span><span class="p">(),</span> <span class="s1">&#39;malczak.net&#39;</span><span class="p">);</span>
+<span class="k">END</span></code></pre></div>
+
+<p>Next step is to create T4 template to generate C# classes based on data in dictionary table. We need a way to tell our template which tables are the dictionary tables and which column will be used as Id and which as Name. Simple XML file can hold that information:</p>
+
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span>
+<span class="nt">&lt;dictionaries&gt;</span>
+  <span class="nt">&lt;dictionary</span> <span class="na">table=</span><span class="s">&quot;dbo.UserStatus&quot;</span> <span class="na">idcolumn=</span><span class="s">&quot;Id&quot;</span> <span class="na">namecolumn=</span><span class="s">&quot;Name&quot;</span> <span class="na">dictionaryname=</span><span class="s">&quot;UserStatus&quot;</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/dictionaries&gt;</span></code></pre></div>
+
+<p>Additional dictionaryname attribute will be used to name C# class so it doesn&#39;t have to follow the same name as database table. Three more DTO classes are used to hold intermediate values during dictionary generation.</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">DictionaryItemDefinition</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">TableName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">IdColumn</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">NameColumn</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>This is the class which is used to store data from XML file. Each row in XML is parsed and returned as DictionaryItemDefinition object.</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">DictionaryTable</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nf">DictionaryTable</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">Items</span> <span class="p">=</span> <span class="k">new</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">DictionaryItem</span><span class="p">&gt;();</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="n">Type</span> <span class="n">IdType</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">DictionaryItem</span><span class="p">&gt;</span> <span class="n">Items</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>DictionaryTable class represents table with list of dictionary entries. So in our example this is instance holding UserStatus table and New value as DictionaryItem.</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">DictionaryItem</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="kt">object</span> <span class="n">Id</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>And last one holds dictionary values, so in our case name New and proper GUID value. All those classes are used in DbDictionaryHelper. Since it&#39;s much nicer to write in C# code in C# classes not in T4 templates, most of the code is encapsulated in DbDictionaryHelper. Then GetDictionaryDefinitionItems() helper method is used in T4 template to parse XML file and retrieve dictionary definition:</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">DictionaryItemDefinition</span><span class="p">&gt;</span> <span class="n">GetDictionaryDefinitionItems</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">document</span> <span class="p">=</span> <span class="n">XDocument</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">configFilePath</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">Enumerable</span><span class="p">.</span><span class="n">ToList</span><span class="p">&lt;</span><span class="n">DictionaryItemDefinition</span><span class="p">&gt;(</span><span class="n">document</span><span class="p">.</span><span class="n">Descendants</span><span class="p">()</span>
+                     <span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">n</span> <span class="p">=&gt;</span> <span class="n">n</span><span class="p">.</span><span class="n">Name</span> <span class="p">==</span> <span class="s">&quot;dictionary&quot;</span><span class="p">)</span>
+                     <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">n</span> <span class="p">=&gt;</span>
+                        <span class="k">new</span> <span class="n">DictionaryItemDefinition</span>
+                        <span class="p">{</span>
+                            <span class="n">TableName</span> <span class="p">=</span> <span class="n">n</span><span class="p">.</span><span class="n">Attribute</span><span class="p">(</span><span class="s">&quot;table&quot;</span><span class="p">).</span><span class="n">Value</span><span class="p">.</span><span class="n">ToString</span><span class="p">(</span><span class="n">CultureInfo</span><span class="p">.</span><span class="n">InvariantCulture</span><span class="p">),</span>
+                            <span class="n">IdColumn</span> <span class="p">=</span> <span class="n">n</span><span class="p">.</span><span class="n">Attribute</span><span class="p">(</span><span class="s">&quot;idcolumn&quot;</span><span class="p">).</span><span class="n">Value</span><span class="p">.</span><span class="n">ToString</span><span class="p">(</span><span class="n">CultureInfo</span><span class="p">.</span><span class="n">InvariantCulture</span><span class="p">),</span>
+                            <span class="n">NameColumn</span> <span class="p">=</span> <span class="n">n</span><span class="p">.</span><span class="n">Attribute</span><span class="p">(</span><span class="s">&quot;namecolumn&quot;</span><span class="p">).</span><span class="n">Value</span><span class="p">.</span><span class="n">ToString</span><span class="p">(</span><span class="n">CultureInfo</span><span class="p">.</span><span class="n">InvariantCulture</span><span class="p">),</span>
+                            <span class="n">Name</span> <span class="p">=</span> <span class="n">n</span><span class="p">.</span><span class="n">Attribute</span><span class="p">(</span><span class="s">&quot;dictionaryname&quot;</span><span class="p">).</span><span class="n">Value</span><span class="p">.</span><span class="n">ToString</span><span class="p">(</span><span class="n">CultureInfo</span><span class="p">.</span><span class="n">InvariantCulture</span><span class="p">)</span>
+                        <span class="p">}));</span>
+<span class="p">}</span></code></pre></div>
+
+<p>For each entry we will query corresponding table in database and get values for columns specified as Id and Name in GetDictionaryTable() method:</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="n">DictionaryTable</span> <span class="nf">GetDictionaryTable</span><span class="p">(</span><span class="n">DictionaryItemDefinition</span> <span class="n">itemDefinition</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">connection</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SqlConnection</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">WebSiteCoreConnectionString</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">command</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SqlCommand</span><span class="p">(</span><span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="n">CultureInfo</span><span class="p">.</span><span class="n">InvariantCulture</span><span class="p">,</span> <span class="s">&quot;SELECT * FROM {0}&quot;</span><span class="p">,</span> <span class="n">itemDefinition</span><span class="p">.</span><span class="n">TableName</span><span class="p">),</span> <span class="n">connection</span><span class="p">))</span>
+        <span class="p">{</span>
+            <span class="n">connection</span><span class="p">.</span><span class="n">Open</span><span class="p">();</span>
+
+            <span class="kt">var</span> <span class="n">reader</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SqlDataAdapter</span><span class="p">(</span><span class="n">command</span><span class="p">);</span>
+            <span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">dataSet</span> <span class="p">=</span> <span class="k">new</span> <span class="n">DataSet</span><span class="p">())</span>
+            <span class="p">{</span>
+                <span class="n">reader</span><span class="p">.</span><span class="n">Fill</span><span class="p">(</span><span class="n">dataSet</span><span class="p">);</span>
+
+                <span class="kt">var</span> <span class="n">dictionaryTable</span> <span class="p">=</span> <span class="k">new</span> <span class="n">DictionaryTable</span> <span class="p">{</span> <span class="n">IdType</span> <span class="p">=</span> <span class="n">dataSet</span><span class="p">.</span><span class="n">Tables</span><span class="p">[</span><span class="m">0</span><span class="p">].</span><span class="n">Rows</span><span class="p">[</span><span class="m">0</span><span class="p">][</span><span class="m">0</span><span class="p">].</span><span class="n">GetType</span><span class="p">()</span> <span class="p">};</span>
+                <span class="k">foreach</span> <span class="p">(</span><span class="n">DataRow</span> <span class="n">row</span> <span class="k">in</span> <span class="n">dataSet</span><span class="p">.</span><span class="n">Tables</span><span class="p">[</span><span class="m">0</span><span class="p">].</span><span class="n">Rows</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">dictionaryTable</span><span class="p">.</span><span class="n">Items</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">DictionaryItem</span>
+                    <span class="p">{</span>
+                        <span class="n">Id</span> <span class="p">=</span> <span class="n">row</span><span class="p">[</span><span class="n">itemDefinition</span><span class="p">.</span><span class="n">IdColumn</span><span class="p">],</span>
+                        <span class="n">Name</span> <span class="p">=</span> <span class="n">row</span><span class="p">[</span><span class="n">itemDefinition</span><span class="p">.</span><span class="n">NameColumn</span><span class="p">].</span><span class="n">ToString</span><span class="p">().</span><span class="n">Replace</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">,</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">)</span>
+                    <span class="p">});</span>
+                <span class="p">}</span>
+
+                <span class="k">return</span> <span class="n">dictionaryTable</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>Having DbDictionaryHelper, we can finally create DbDictionary.tt template which just invoke functionality from helper class and iterate over the results to create code blocks:</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="p">&lt;</span><span class="err">#@</span> <span class="n">template</span> <span class="n">debug</span><span class="p">=</span><span class="s">&quot;true&quot;</span> <span class="n">hostspecific</span><span class="p">=</span><span class="s">&quot;true&quot;</span> <span class="n">language</span><span class="p">=</span><span class="s">&quot;C#&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="err">#@</span> <span class="n">assembly</span> <span class="n">name</span><span class="p">=</span><span class="s">&quot;System.Core&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="err">#@</span> <span class="n">assembly</span> <span class="n">name</span><span class="p">=</span><span class="s">&quot;System.Data&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="err">#@</span> <span class="n">assembly</span> <span class="n">name</span><span class="p">=</span><span class="s">&quot;System.Configuration&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="err">#@</span> <span class="n">assembly</span> <span class="n">name</span><span class="p">=</span><span class="s">&quot;System.Xml&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="err">#@</span> <span class="n">assembly</span> <span class="n">name</span><span class="p">=</span><span class="s">&quot;$(TargetPath)&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="err">#@</span> <span class="n">import</span> <span class="n">namespace</span><span class="p">=</span><span class="s">&quot;WebSiteCore.Common.Models.Domain.EntityDictionary&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="err">#@</span> <span class="n">output</span> <span class="n">extension</span><span class="p">=</span><span class="s">&quot;.cs&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="err">#</span>
+    <span class="kt">var</span> <span class="n">dictionaryItems</span> <span class="p">=</span> <span class="k">new</span>  <span class="n">DbDictionaryHelper</span><span class="p">(</span><span class="n">Host</span><span class="p">,</span> 
+                                                  <span class="n">Host</span><span class="p">.</span><span class="n">ResolvePath</span><span class="p">(</span><span class="s">@&quot;.\DbDictionary.xml&quot;</span><span class="p">),</span> 
+                                                  <span class="n">Host</span><span class="p">.</span><span class="n">ResolvePath</span><span class="p">(</span><span class="s">@&quot;..\..\..\..\WebSiteCore.Web\Web.config&quot;</span><span class="p">));</span>
+<span class="err">#</span><span class="p">&gt;</span>
+<span class="k">namespace</span> <span class="nn">WebSiteCore.Common.Models.Domain.EntityDictionary</span>
+<span class="p">{</span>
+<span class="p">&lt;</span><span class="err">#</span>
+        <span class="kt">var</span> <span class="n">tableDefinitions</span> <span class="p">=</span> <span class="n">dictionaryItems</span><span class="p">.</span><span class="n">GetDictionaryDefinitionItems</span><span class="p">();</span>
+
+        <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">tableDefinition</span> <span class="k">in</span> <span class="n">tableDefinitions</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">table</span> <span class="p">=</span> <span class="n">dictionaryItems</span><span class="p">.</span><span class="n">GetDictionaryTable</span><span class="p">(</span><span class="n">tableDefinition</span><span class="p">);</span>
+<span class="err">#</span><span class="p">&gt;</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="err">&lt;#= </span><span class="nc">tableDefinition</span><span class="p">.</span><span class="n">Name</span> <span class="err">#</span><span class="p">&gt;</span>
+    <span class="p">{</span>
+<span class="p">&lt;</span><span class="err">#</span>
+            <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">item</span> <span class="k">in</span> <span class="n">table</span><span class="p">.</span><span class="n">Items</span><span class="p">)</span>
+            <span class="p">{</span>
+<span class="err">#</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="err">#</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">table</span><span class="p">.</span><span class="n">Items</span><span class="p">.</span><span class="n">IndexOf</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="p">!=</span> <span class="m">0</span><span class="p">)</span>
+                <span class="p">{</span>
+<span class="err">#</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="err">#</span>
+                <span class="p">}</span>
+<span class="err">#</span><span class="p">&gt;</span>
+        <span class="k">public</span> <span class="k">static</span> <span class="p">&lt;</span><span class="err">#</span><span class="p">=</span> <span class="n">tableDefinition</span><span class="p">.</span><span class="n">Name</span> <span class="err">#</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="err">#</span><span class="p">=</span> <span class="n">item</span><span class="p">.</span><span class="n">Name</span> <span class="err">#</span><span class="p">&gt;</span> 
+        <span class="p">{</span> 
+            <span class="k">get</span> 
+            <span class="p">{</span> 
+                <span class="k">return</span> <span class="k">new</span> <span class="p">&lt;</span><span class="err">#</span><span class="p">=</span> <span class="n">tableDefinition</span><span class="p">.</span><span class="n">Name</span> <span class="err">#</span><span class="p">&gt;</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;&lt;#= item.Name #&gt;&quot;</span><span class="p">,</span> <span class="n">Id</span> <span class="p">=</span> <span class="p">&lt;</span><span class="err">#</span><span class="p">=</span> <span class="n">table</span><span class="p">.</span><span class="n">IdType</span><span class="p">.</span><span class="n">FullName</span> <span class="err">#</span><span class="p">&gt;.</span><span class="n">Parse</span><span class="p">(</span><span class="s">&quot;&lt;#=item.Id#&gt;&quot;</span><span class="p">)</span> <span class="p">};</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+<span class="p">&lt;</span><span class="err">#</span>
+        <span class="p">}</span>
+<span class="err">#</span><span class="p">&gt;</span>
+    
+        <span class="k">public</span> <span class="p">&lt;</span><span class="err">#</span><span class="p">=</span> <span class="n">table</span><span class="p">.</span><span class="n">IdType</span><span class="p">.</span><span class="n">FullName</span> <span class="err">#</span><span class="p">&gt;</span> <span class="n">Id</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+        <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">&lt;</span><span class="cp">#      if (tableDefinitions.IndexOf(tableDefinition) != tableDefinitions.Count - 1) </span>
+        <span class="p">{</span> 
+<span class="err">#</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="err">#</span>      <span class="p">}</span> <span class="err">#</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="err">#</span>  <span class="p">}</span> <span class="err">#</span><span class="p">&gt;</span>
+<span class="p">}</span></code></pre></div>
+
+<p>Syntax of T4 is not one of my favorites but you can get used to it if you use good editor with proper code highlighting. Final generated class for our simple example will look like this:</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">namespace</span> <span class="nn">WebSiteCore.Common.Models.Domain.EntityDictionary</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">class</span> <span class="nc">UserStatus</span>
+    <span class="p">{</span>
+        <span class="k">public</span> <span class="k">static</span> <span class="n">UserStatus</span> <span class="n">New</span> 
+        <span class="p">{</span> 
+            <span class="k">get</span> 
+            <span class="p">{</span> 
+                <span class="k">return</span> <span class="k">new</span> <span class="n">UserStatus</span> <span class="p">{</span> <span class="n">Name</span> <span class="p">=</span> <span class="s">&quot;New&quot;</span><span class="p">,</span> <span class="n">Id</span> <span class="p">=</span> <span class="n">System</span><span class="p">.</span><span class="n">Guid</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="s">&quot;B58100F1-B66B-4FC1-B9AC-37DE29FA3C08&quot;</span><span class="p">)</span> <span class="p">};</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">public</span> <span class="n">System</span><span class="p">.</span><span class="n">Guid</span> <span class="n">Id</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+        <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>And can be used in C# code in following way:</p>
+
+<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="n">If</span> <span class="p">(</span><span class="n">status</span> <span class="p">==</span> <span class="n">UserStatus</span><span class="p">.</span><span class="n">New</span><span class="p">.</span><span class="n">Id</span><span class="p">)</span> 
+<span class="p">{</span>
+    <span class="c1">//You code</span>
+<span class="p">}</span></code></pre></div>
+
+<p>Now every time you add new dictionary, it&#39;s enough to add it to XML definition and regenerate T4 by jus saving it again. Also if you insert new values and save T4, values will be updated. Nice way of running all of your templates is to add step in build process to generate those for you, or use BUILD -&gt; Transform All T4 Templates menu option in Visual Studio 2013. Full example is available on GitHub as a <a href="https://gist.github.com/jmalczak/d2b8971c47909539778b">Gist</a>.</p>
+
+    </div>
+</article>
+
+<div>
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_shortname = 'blogmalczaknet'; 
+    (function () {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    (function () {
+        var s = document.createElement('script');
+        s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+</div>
+
+    </div>
+</main>
+    <footer class="footer">
+    <div class="copyright">
+        Proudly published with <a class="icon-ghost" href="http://jekyllrb.com/">Jekyll, Grunt, RequireJs and many more.</a>
+    </div>
+    <div class="social-icons">
+        
+        <a href="http://twitter.com/malczu">
+        <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fa fa-twitter fa-stack-1x"></i>
+        </span>
+        </a>
+           
+        <a href="http://github.com/jmalczak">
+        <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fa fa-github fa-stack-1x"></i>
+        </span>
+        </a>
+         
+        <a href="http://facebook.com/malczu">
+        <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fa fa-facebook fa-stack-1x"></i>
+        </span>
+        </a>
+         
+        <a href="https://www.linkedin.com/in/jakubmalczak">
+        <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fa fa-linkedin fa-stack-1x"></i>
+        </span>
+        </a>
+        
+    </div>
+    <div class="clearfix"></div>
+</footer>
+
+    
+      <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-58175776-1', 'auto');
+  ga('send', 'pageview');
+</script>
+    
+  </body>
+</html>
