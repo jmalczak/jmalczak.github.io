@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-<title type="text"></title>
+<title type="text">Developer Abroad</title>
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://developerabroad.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://developerabroad.com/" />
-<updated>2015-01-11T20:41:24+01:00</updated>
+<updated>2015-01-12T01:28:36+01:00</updated>
 <id>http://developerabroad.com/</id>
 <author>
-  <name></name>
+  <name>Jakub Malczak</name>
   <uri>http://developerabroad.com/</uri>
-  <email></email>
+  <email>jmalczak@gmail.com</email>
 </author>
 
 
@@ -20,9 +20,9 @@
   <published>2015-01-11T00:00:00+01:00</published>
   <updated>2015-01-11T00:00:00+01:00</updated>
   <author>
-    <name></name>
+    <name>Jakub Malczak</name>
     <uri>http://developerabroad.com</uri>
-    <email></email>
+    <email>jmalczak@gmail.com</email>
   </author>
   
   <content type="html">
@@ -246,7 +246,7 @@
 &lt;p&gt;With this approach, you can easily minify and bundle JavaScript files before deployment. It&amp;#39;s also possible to use intellisense, since every time you use webSiteCore.Resource object, interpreter knows its definition. If some parts of your application are written purely in JavaScript, you can request dynamic loading of specific languages by using RequireJS. Unfortunately, this solution is not entirely perfect as well. When one of the requirements is to change localized texts after deployment of your application, you will have to regenerate JavaScript files and re upload them to the server. Full example is available on GitHub as a &lt;a href=&quot;https://gist.github.com/jmalczak/2c615c10dadb9836cbc5&quot;&gt;Gist&lt;/a&gt;.&lt;/p&gt;
 
   
-  &lt;p&gt;&lt;a href=&quot;http://developerabroad.com/programming/t4/resources/localization/2015/01/11/dot-net-resources-from-javascript/&quot;&gt;Use .NET resources from JavaScript.&lt;/a&gt; was originally published by  at &lt;a href=&quot;http://developerabroad.com&quot;&gt;&lt;/a&gt; on January 11, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://developerabroad.com/programming/t4/resources/localization/2015/01/11/dot-net-resources-from-javascript/&quot;&gt;Use .NET resources from JavaScript.&lt;/a&gt; was originally published by Jakub Malczak at &lt;a href=&quot;http://developerabroad.com&quot;&gt;Developer Abroad&lt;/a&gt; on January 11, 2015.&lt;/p&gt;</content>
 </entry>
 
 
@@ -257,9 +257,9 @@
   <published>2015-01-06T00:00:00+01:00</published>
   <updated>2015-01-06T00:00:00+01:00</updated>
   <author>
-    <name></name>
+    <name>Jakub Malczak</name>
     <uri>http://developerabroad.com</uri>
-    <email></email>
+    <email>jmalczak@gmail.com</email>
   </author>
   
   <content type="html">
@@ -476,7 +476,7 @@
 &lt;p&gt;Now every time you add a new dictionary, it&amp;#39;s enough to add it to XML definition and regenerate T4 by jus saving it again. Also if you insert the new values and save T4, those values will get updated. Another nice way of running all of your templates is to add a step in build process to generate those for you, or use BUILD -&amp;gt; Transform All T4 Templates menu option in Visual Studio 2013. Full example is available on GitHub as a &lt;a href=&quot;https://gist.github.com/jmalczak/d2b8971c47909539778b&quot;&gt;Gist&lt;/a&gt;.&lt;/p&gt;
 
   
-  &lt;p&gt;&lt;a href=&quot;http://developerabroad.com/programming/t4/dictionary/2015/01/06/using-t4-templates/&quot;&gt;Using T4 templates to generate C# dictionary from SQL table values.&lt;/a&gt; was originally published by  at &lt;a href=&quot;http://developerabroad.com&quot;&gt;&lt;/a&gt; on January 06, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://developerabroad.com/programming/t4/dictionary/2015/01/06/using-t4-templates/&quot;&gt;Using T4 templates to generate C# dictionary from SQL table values.&lt;/a&gt; was originally published by Jakub Malczak at &lt;a href=&quot;http://developerabroad.com&quot;&gt;Developer Abroad&lt;/a&gt; on January 06, 2015.&lt;/p&gt;</content>
 </entry>
 
 
@@ -487,9 +487,9 @@
   <published>2014-11-15T00:00:00+01:00</published>
   <updated>2014-11-15T00:00:00+01:00</updated>
   <author>
-    <name></name>
+    <name>Jakub Malczak</name>
     <uri>http://developerabroad.com</uri>
-    <email></email>
+    <email>jmalczak@gmail.com</email>
   </author>
   
   <content type="html">
@@ -512,7 +512,7 @@
 &lt;p&gt;You can also specify delay in seconds after which Process Killer will start killing certain tasks. To close application itself, double click it&amp;#39;s tray icon.&lt;/p&gt;
 
   
-  &lt;p&gt;&lt;a href=&quot;http://developerabroad.com/programming/2014/11/15/process-killer/&quot;&gt;Process killer.&lt;/a&gt; was originally published by  at &lt;a href=&quot;http://developerabroad.com&quot;&gt;&lt;/a&gt; on November 15, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://developerabroad.com/programming/2014/11/15/process-killer/&quot;&gt;Process killer.&lt;/a&gt; was originally published by Jakub Malczak at &lt;a href=&quot;http://developerabroad.com&quot;&gt;Developer Abroad&lt;/a&gt; on November 15, 2014.&lt;/p&gt;</content>
 </entry>
 
 
@@ -523,9 +523,9 @@
   <published>2014-11-12T00:00:00+01:00</published>
   <updated>2014-11-12T00:00:00+01:00</updated>
   <author>
-    <name></name>
+    <name>Jakub Malczak</name>
     <uri>http://developerabroad.com</uri>
-    <email></email>
+    <email>jmalczak@gmail.com</email>
   </author>
   
   <content type="html">
@@ -543,7 +543,7 @@
 &lt;/blockquote&gt;
 
   
-  &lt;p&gt;&lt;a href=&quot;http://developerabroad.com/programming/2014/11/12/attachtow3wp-change/&quot;&gt;AttachToW3WP improvement.&lt;/a&gt; was originally published by  at &lt;a href=&quot;http://developerabroad.com&quot;&gt;&lt;/a&gt; on November 12, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://developerabroad.com/programming/2014/11/12/attachtow3wp-change/&quot;&gt;AttachToW3WP improvement.&lt;/a&gt; was originally published by Jakub Malczak at &lt;a href=&quot;http://developerabroad.com&quot;&gt;Developer Abroad&lt;/a&gt; on November 12, 2014.&lt;/p&gt;</content>
 </entry>
 
 
@@ -554,9 +554,9 @@
   <published>2012-08-15T00:00:00+02:00</published>
   <updated>2012-08-15T00:00:00+02:00</updated>
   <author>
-    <name></name>
+    <name>Jakub Malczak</name>
     <uri>http://developerabroad.com</uri>
-    <email></email>
+    <email>jmalczak@gmail.com</email>
   </author>
   
   <content type="html">
@@ -570,7 +570,7 @@ I have found this great article which explains how this is possible. If you have
 &lt;/blockquote&gt;
 
   
-  &lt;p&gt;&lt;a href=&quot;http://developerabroad.com/programming/2012/08/15/ssas-attribute/&quot;&gt;SQL Server Analysis Services and duplicate attribute key problem.&lt;/a&gt; was originally published by  at &lt;a href=&quot;http://developerabroad.com&quot;&gt;&lt;/a&gt; on August 15, 2012.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://developerabroad.com/programming/2012/08/15/ssas-attribute/&quot;&gt;SQL Server Analysis Services and duplicate attribute key problem.&lt;/a&gt; was originally published by Jakub Malczak at &lt;a href=&quot;http://developerabroad.com&quot;&gt;Developer Abroad&lt;/a&gt; on August 15, 2012.&lt;/p&gt;</content>
 </entry>
 
 
@@ -581,9 +581,9 @@ I have found this great article which explains how this is possible. If you have
   <published>2012-03-18T00:00:00+01:00</published>
   <updated>2012-03-18T00:00:00+01:00</updated>
   <author>
-    <name></name>
+    <name>Jakub Malczak</name>
     <uri>http://developerabroad.com</uri>
-    <email></email>
+    <email>jmalczak@gmail.com</email>
   </author>
   
   <content type="html">
@@ -613,7 +613,7 @@ You have to locate following line:&lt;/p&gt;
 &lt;p&gt;This small change fix the problem and let you use Windows Live Writer to publish your posts.&lt;/p&gt;
 
   
-  &lt;p&gt;&lt;a href=&quot;http://developerabroad.com/posting/2012/03/18/live-writter-bug/&quot;&gt;Wordpress 3.2.1 and Windows Live Writter bug.&lt;/a&gt; was originally published by  at &lt;a href=&quot;http://developerabroad.com&quot;&gt;&lt;/a&gt; on March 18, 2012.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://developerabroad.com/posting/2012/03/18/live-writter-bug/&quot;&gt;Wordpress 3.2.1 and Windows Live Writter bug.&lt;/a&gt; was originally published by Jakub Malczak at &lt;a href=&quot;http://developerabroad.com&quot;&gt;Developer Abroad&lt;/a&gt; on March 18, 2012.&lt;/p&gt;</content>
 </entry>
 
 </feed>
