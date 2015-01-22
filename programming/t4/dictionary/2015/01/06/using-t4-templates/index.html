@@ -7,7 +7,7 @@
     <meta name="description" content="How to use Microsoft T4 templating engine to generate C# dictionary classes from SQL table values." />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link type="text/plain" rel="author" href="/humans.txt" />
-    <link rel="stylesheet" href="/css/main.46b1.css"/>
+    <link rel="stylesheet" href="/css/main.8eb6.css"/>
     <script data-main="/js/main.de13" src="/_bower_components/requirejs/require.js"></script>
     <!--
       Nice that someone is reading the markup. If you would like to hire me, or you need people for
@@ -45,43 +45,78 @@
     <div>
         <p>When you store your data in a SQL relational database, it&#39;s always worth considering whether to have your dictionary entries not only in C# code, but in database as well. Thanks to that you can keep referential integrity between your data. Let me show you an example. If we would like to model our User table in the following way:</p>
 
-<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="k">User</span><span class="p">]</span> <span class="p">(</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-sql" data-lang="sql">1
+2
+3
+4
+5</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="k">User</span><span class="p">]</span> <span class="p">(</span>
     <span class="p">[</span><span class="n">Id</span><span class="p">]</span>                   <span class="n">UNIQUEIDENTIFIER</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
     <span class="p">[</span><span class="n">Name</span><span class="p">]</span>                 <span class="n">NVARCHAR</span> <span class="p">(</span><span class="mi">256</span><span class="p">)</span>   <span class="k">NULL</span><span class="p">,</span>
     <span class="p">[</span><span class="n">StatusId</span><span class="p">]</span>             <span class="n">UNIQUEIDENTIFIER</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
-<span class="p">)</span></code></pre></div>
+<span class="p">)</span>
+</pre></div>
+</td></tr></table>
 
 <p>As you can see, we have a simple user with Id, Name and user status. Since status is just a simple GUID, you can insert whatever you want there, except NULL. You probably have some kind of a guard clause in your C# code which prevents you from inserting invalid data. But wouldn&#39;t be cool if we could use SQL referential integrity to make sure that data will be consistent, even if you would like to insert row manually? To do that, we can add another table called UserStatus:</p>
 
-<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">UserStatus</span><span class="p">]</span> <span class="p">(</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-sql" data-lang="sql">1
+2
+3
+4</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">UserStatus</span><span class="p">]</span> <span class="p">(</span>
     <span class="p">[</span><span class="n">Id</span><span class="p">]</span>                   <span class="n">UNIQUEIDENTIFIER</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
     <span class="p">[</span><span class="n">Name</span><span class="p">]</span>                 <span class="n">NVARCHAR</span> <span class="p">(</span><span class="mi">256</span><span class="p">)</span>   <span class="k">NULL</span><span class="p">,</span>
-<span class="p">)</span></code></pre></div>
+<span class="p">)</span>
+</pre></div>
+</td></tr></table>
 
 <p>And now we can add a foreign key from User to UserStatus table. This is done by adding the following line to User table definition:</p>
 
-<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">CONSTRAINT</span> <span class="p">[</span><span class="n">FK_dbo</span><span class="p">.</span><span class="n">User_dbo</span><span class="p">.</span><span class="n">UserStatus_StatusId</span><span class="p">]</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">([</span><span class="n">StatusId</span><span class="p">])</span> <span class="k">REFERENCES</span> <span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">UserStatus</span><span class="p">]([</span><span class="n">Id</span><span class="p">])</span></code></pre></div>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-sql" data-lang="sql">1</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="k">CONSTRAINT</span> <span class="p">[</span><span class="n">FK_dbo</span><span class="p">.</span><span class="n">User_dbo</span><span class="p">.</span><span class="n">UserStatus_StatusId</span><span class="p">]</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">([</span><span class="n">StatusId</span><span class="p">])</span> <span class="k">REFERENCES</span> <span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">UserStatus</span><span class="p">]([</span><span class="n">Id</span><span class="p">])</span>
+</pre></div>
+</td></tr></table>
 
 <p>If you will try to insert a new user with StatusId not in UserStatus table, you will receive an error. Now everything is fine, but you have to keep 2 copies of user status, one in your C# code in form of enum or more complex dictionary class, and the second one in your database. It&#39;s often the case that those 2 copies are out of sync. To get rid of this problem we will keep only one copy of user statuses and we will generate C# class which will be used in our C# code. T4 template fits perfectly for this kind of a job. First of all, let&#39;s make sure that all user statuses are inserted into database table. To do this, we can create SQL post deployment script which will be used to either add or edit statuses. Script can look like this:</p>
 
-<div class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">DECLARE</span> <span class="o">@</span><span class="n">Id</span> <span class="n">UNIQUEIDENTIFIER</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-sql" data-lang="sql">1
+2
+3
+4
+5
+6
+7</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="k">DECLARE</span> <span class="o">@</span><span class="n">Id</span> <span class="n">UNIQUEIDENTIFIER</span>
 <span class="k">SET</span> <span class="o">@</span><span class="n">Id</span> <span class="o">=</span> <span class="s1">&#39;B58100F1-B66B-4FC1-B9AC-37DE29FA3C08&#39;</span>
 
 <span class="n">IF</span> <span class="k">NOT</span> <span class="k">EXISTS</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">TOP</span> <span class="mi">1</span> <span class="mi">1</span> <span class="k">FROM</span> <span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">UserStatus</span><span class="p">]</span> <span class="k">WHERE</span> <span class="p">[</span><span class="n">Id</span><span class="p">]</span> <span class="o">=</span> <span class="o">@</span><span class="n">Id</span><span class="p">)</span>
 <span class="k">BEGIN</span>
     <span class="k">INSERT</span> <span class="k">INTO</span> <span class="p">[</span><span class="n">dbo</span><span class="p">].[</span><span class="n">UserStatus</span><span class="p">](</span><span class="n">Id</span><span class="p">,</span> <span class="n">Name</span><span class="p">,</span> <span class="n">InsertDate</span><span class="p">,</span> <span class="n">InsertUser</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="o">@</span><span class="n">Id</span><span class="p">,</span> <span class="s1">&#39;New&#39;</span><span class="p">,</span> <span class="n">GETUTCDATE</span><span class="p">(),</span> <span class="s1">&#39;malczak.net&#39;</span><span class="p">);</span>
-<span class="k">END</span></code></pre></div>
+<span class="k">END</span>
+</pre></div>
+</td></tr></table>
 
 <p>Next step is to create T4 template to generate C# classes based on data in dictionary table. We need a way to tell our template which tables are the dictionary tables and which column will be used as Id and which one as Name. Simple XML file can hold that information:</p>
 
-<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-xml" data-lang="xml">1
+2
+3
+4</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span>
 <span class="nt">&lt;dictionaries&gt;</span>
   <span class="nt">&lt;dictionary</span> <span class="na">table=</span><span class="s">&quot;dbo.UserStatus&quot;</span> <span class="na">idcolumn=</span><span class="s">&quot;Id&quot;</span> <span class="na">namecolumn=</span><span class="s">&quot;Name&quot;</span> <span class="na">dictionaryname=</span><span class="s">&quot;UserStatus&quot;</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;/dictionaries&gt;</span></code></pre></div>
+<span class="nt">&lt;/dictionaries&gt;</span>
+</pre></div>
+</td></tr></table>
 
 <p>Additional dictionaryname attribute will be used to name C# class so it doesn&#39;t have to follow the same name as database table. Three more DTO classes are used to hold the intermediate values during dictionary generation.</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">DictionaryItemDefinition</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-csharp" data-lang="csharp"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="k">public</span> <span class="k">class</span> <span class="nc">DictionaryItemDefinition</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="kt">string</span> <span class="n">TableName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
 
@@ -90,11 +125,23 @@
     <span class="k">public</span> <span class="kt">string</span> <span class="n">NameColumn</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
 
     <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
 
 <p>This is the class which is used to store data from XML file. Each row in XML is parsed and returned as DictionaryItemDefinition object.</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">DictionaryTable</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-csharp" data-lang="csharp"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="k">public</span> <span class="k">class</span> <span class="nc">DictionaryTable</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="nf">DictionaryTable</span><span class="p">()</span>
     <span class="p">{</span>
@@ -104,20 +151,43 @@
     <span class="k">public</span> <span class="n">Type</span> <span class="n">IdType</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
 
     <span class="k">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">DictionaryItem</span><span class="p">&gt;</span> <span class="n">Items</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
 
 <p>DictionaryTable class represents table with the list of dictionary entries. So in our example this is the instance which is holding UserStatus table and New value as DictionaryItem.</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="k">class</span> <span class="nc">DictionaryItem</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-csharp" data-lang="csharp">1
+2
+3
+4
+5
+6</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="k">public</span> <span class="k">class</span> <span class="nc">DictionaryItem</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
 
     <span class="k">public</span> <span class="kt">object</span> <span class="n">Id</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
 
 <p>And last one holds dictionary values, so in our case name New and proper GUID value. All those classes are used in DbDictionaryHelper. Since it&#39;s much nicer to write in C# code in C# classes not in T4 templates, most of the code is encapsulated in DbDictionaryHelper. Then GetDictionaryDefinitionItems() helper method is used in T4 template to parse XML file and retrieve dictionary definition:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">DictionaryItemDefinition</span><span class="p">&gt;</span> <span class="n">GetDictionaryDefinitionItems</span><span class="p">()</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-csharp" data-lang="csharp"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="k">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">DictionaryItemDefinition</span><span class="p">&gt;</span> <span class="n">GetDictionaryDefinitionItems</span><span class="p">()</span>
 <span class="p">{</span>
     <span class="kt">var</span> <span class="n">document</span> <span class="p">=</span> <span class="n">XDocument</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">configFilePath</span><span class="p">);</span>
 
@@ -131,11 +201,40 @@
                             <span class="n">NameColumn</span> <span class="p">=</span> <span class="n">n</span><span class="p">.</span><span class="n">Attribute</span><span class="p">(</span><span class="s">&quot;namecolumn&quot;</span><span class="p">).</span><span class="n">Value</span><span class="p">.</span><span class="n">ToString</span><span class="p">(</span><span class="n">CultureInfo</span><span class="p">.</span><span class="n">InvariantCulture</span><span class="p">),</span>
                             <span class="n">Name</span> <span class="p">=</span> <span class="n">n</span><span class="p">.</span><span class="n">Attribute</span><span class="p">(</span><span class="s">&quot;dictionaryname&quot;</span><span class="p">).</span><span class="n">Value</span><span class="p">.</span><span class="n">ToString</span><span class="p">(</span><span class="n">CultureInfo</span><span class="p">.</span><span class="n">InvariantCulture</span><span class="p">)</span>
                         <span class="p">}));</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
 
 <p>For each entry we will query corresponding table in database and get values for columns specified as Id and Name in GetDictionaryTable() method:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">public</span> <span class="n">DictionaryTable</span> <span class="nf">GetDictionaryTable</span><span class="p">(</span><span class="n">DictionaryItemDefinition</span> <span class="n">itemDefinition</span><span class="p">)</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-csharp" data-lang="csharp"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="k">public</span> <span class="n">DictionaryTable</span> <span class="nf">GetDictionaryTable</span><span class="p">(</span><span class="n">DictionaryItemDefinition</span> <span class="n">itemDefinition</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">connection</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SqlConnection</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">WebSiteCoreConnectionString</span><span class="p">))</span>
     <span class="p">{</span>
@@ -162,11 +261,70 @@
             <span class="p">}</span>
         <span class="p">}</span>
     <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
 
 <p>Having DbDictionaryHelper, we can finally create DbDictionary.tt template which just invoke the functionality from helper class and iterate over the results to create code blocks:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="p">&lt;</span><span class="err">#@</span> <span class="n">template</span> <span class="n">debug</span><span class="p">=</span><span class="s">&quot;true&quot;</span> <span class="n">hostspecific</span><span class="p">=</span><span class="s">&quot;true&quot;</span> <span class="n">language</span><span class="p">=</span><span class="s">&quot;C#&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-csharp" data-lang="csharp"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="p">&lt;</span><span class="err">#@</span> <span class="n">template</span> <span class="n">debug</span><span class="p">=</span><span class="s">&quot;true&quot;</span> <span class="n">hostspecific</span><span class="p">=</span><span class="s">&quot;true&quot;</span> <span class="n">language</span><span class="p">=</span><span class="s">&quot;C#&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="err">#@</span> <span class="n">assembly</span> <span class="n">name</span><span class="p">=</span><span class="s">&quot;System.Core&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="err">#@</span> <span class="n">assembly</span> <span class="n">name</span><span class="p">=</span><span class="s">&quot;System.Data&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="err">#@</span> <span class="n">assembly</span> <span class="n">name</span><span class="p">=</span><span class="s">&quot;System.Configuration&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
@@ -223,11 +381,29 @@
 
 <span class="p">&lt;</span><span class="err">#</span>      <span class="p">}</span> <span class="err">#</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="err">#</span>  <span class="p">}</span> <span class="err">#</span><span class="p">&gt;</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
 
 <p>Syntax of T4 is not among my favorites but you can get used to it if you use good editor with a proper code highlighting. Final generated class for our simple example will look like this:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="k">namespace</span> <span class="nn">WebSiteCore.Common.Models.Domain.EntityDictionary</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-csharp" data-lang="csharp"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="k">namespace</span> <span class="nn">WebSiteCore.Common.Models.Domain.EntityDictionary</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="k">class</span> <span class="nc">UserStatus</span>
     <span class="p">{</span>
@@ -243,14 +419,21 @@
 
         <span class="k">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
     <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
 
 <p>And can be used in C# code in following way:</p>
 
-<div class="highlight"><pre><code class="language-csharp" data-lang="csharp"><span class="n">If</span> <span class="p">(</span><span class="n">status</span> <span class="p">==</span> <span class="n">UserStatus</span><span class="p">.</span><span class="n">New</span><span class="p">.</span><span class="n">Id</span><span class="p">)</span> 
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-csharp" data-lang="csharp">1
+2
+3
+4</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="n">If</span> <span class="p">(</span><span class="n">status</span> <span class="p">==</span> <span class="n">UserStatus</span><span class="p">.</span><span class="n">New</span><span class="p">.</span><span class="n">Id</span><span class="p">)</span> 
 <span class="p">{</span>
     <span class="c1">//You code</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
 
 <p>Now every time you add a new dictionary, it&#39;s enough to add it to XML definition and regenerate T4 by jus saving it again. Also if you insert the new values and save T4, those values will get updated. Another nice way of running all of your templates is to add a step in build process to generate those for you, or use BUILD -&gt; Transform All T4 Templates menu option in Visual Studio 2013. Full example is available on GitHub as a <a href="https://gist.github.com/jmalczak/d2b8971c47909539778b">Gist</a>.</p>
 

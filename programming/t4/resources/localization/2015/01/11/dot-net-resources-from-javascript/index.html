@@ -7,7 +7,7 @@
     <meta name="description" content="How to use Microsoft .NET resources in connection with T4 templates to access localized strings from JavaScript." />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link type="text/plain" rel="author" href="/humans.txt" />
-    <link rel="stylesheet" href="/css/main.46b1.css"/>
+    <link rel="stylesheet" href="/css/main.8eb6.css"/>
     <script data-main="/js/main.de13" src="/_bower_components/requirejs/require.js"></script>
     <!--
       Nice that someone is reading the markup. If you would like to hire me, or you need people for
@@ -51,17 +51,27 @@
 
 <p>You can find an example of HTTP handler implementation on Rick Strahl <a href="http://weblog.west-wind.com/posts/2009/Apr/02/A-Localization-Handler-to-serve-ASPNET-Resources-to-JavaScript">web page</a>. It is a simple HTTP handler which returns JavaScript object for either local or global resource set. In order to use it you should add JavaScript script tag with src set to URL of your HTTP handler. Culture is provided via query string and included in the original script URL. Example code:</p>
 
-<div class="highlight"><pre><code class="language-c#" data-lang="c#"><span class="p">&lt;</span><span class="n">script</span> <span class="n">src</span><span class="p">=</span><span class="err">&#39;</span><span class="s">&quot; + </span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-c#" data-lang="c#">1
+2
+3
+4</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="p">&lt;</span><span class="n">script</span> <span class="n">src</span><span class="p">=</span><span class="err">&#39;</span><span class="s">&quot; + </span>
     <span class="n">Westwind</span><span class="p">.</span><span class="n">Globalization</span><span class="p">.</span><span class="n">JavaScriptResourceHandler</span><span class="p">.</span><span class="n">GetJavaScriptGlobalResourcesUrl</span><span class="p">(</span><span class="s">&quot;globalRes&quot;</span><span class="p">,</span><span class="s">&quot;Resources&quot;</span><span class="p">)</span> <span class="p">+</span> 
     <span class="s">&quot;&#39; type=&#39;text/javascript&#39;&gt;</span>
-<span class="p">&lt;/</span><span class="n">script</span><span class="p">&gt;</span><span class="s">&quot;</span></code></pre></div>
+<span class="p">&lt;/</span><span class="n">script</span><span class="p">&gt;</span><span class="s">&quot;</span>
+</pre></div>
+</td></tr></table>
 
 <p>And this can embeed following JavaScript in your page:</p>
 
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">globalRes</span> <span class="o">=</span> <span class="p">{</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-javascript" data-lang="javascript">1
+2
+3
+4</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">globalRes</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">Today</span><span class="o">:</span> <span class="s1">&#39;Heute&#39;</span><span class="p">,</span>
     <span class="nx">Yesterday</span><span class="o">:</span> <span class="s1">&#39;Gestern&#39;</span>
-<span class="p">};</span></code></pre></div>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table>
 
 <p>Lately when Microservices are becoming more and more popular, the same, may be achieved by returning your JavaScript form simple WebApi REST service. This solution will do the work, but it&#39;s not the best one you can use. First of all, you can&#39;t minimize JavaScript code. You would have to do it on the fly. You also loose intellisense for all of you resources, when you develop JavaScript code. This may sound like a minor issue, but when you have hundreds of resources, it&#39;s not helping. One huge advantage of this approach is that you can change your localization texts in runtime, and returned JavaScript will be regenerated again and will reflect your changes.</p>
 
@@ -69,10 +79,15 @@
 
 <p>This is the easiest method. In your view engine files (.aspx or .cshtml), you can create explicit resource object, and select only those resources which are really needed in JavaScript code. For example, you can create localization object like this:</p>
 
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">localization</span> <span class="o">=</span> <span class="p">{</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-javascript" data-lang="javascript">1
+2
+3
+4</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">localization</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">Today</span><span class="o">:</span> <span class="s1">&#39;@Resources.YourResourceClass.Today&#39;</span><span class="p">,</span>
     <span class="nx">Yesterday</span><span class="o">:</span> <span class="s1">&#39;@Resources.YourResourceClass.Yesterday&#39;</span>
-<span class="p">};</span></code></pre></div>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table>
 
 <p>This will make sure that your localization object will be rendered correctly in a current culture. Simple and powerful solution, but not without it&#39;s own drawbacks. You still can&#39;t minify this code. It&#39;s also required to put this code in view engine files, since .js files are not processed by ASP.NET pipeline, you can&#39;t place code like that where it belongs to. So you can imagine the long listings of those in every view. Depending where you use your localization object, you may have some intellisense support. This solution is also a perfect choice if you will change localization texts after deployment.</p>
 
@@ -80,7 +95,16 @@
 
 <p>Another approach to the problem, may be to generate set of JavaScript files which will hold translated resources in all of available languages. First step would be to create class to get all resources available in our application in the every supported culture. We will use ResourceModel class for this reason:</p>
 
-<div class="highlight"><pre><code class="language-c#" data-lang="c#"><span class="k">public</span> <span class="k">class</span> <span class="nc">ResourceModel</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-csharp" data-lang="csharp"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="k">public</span> <span class="k">class</span> <span class="nc">ResourceModel</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="kt">string</span> <span class="n">ResourceFileName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
 
@@ -89,15 +113,73 @@
     <span class="k">public</span> <span class="kt">string</span> <span class="n">Key</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
 
     <span class="k">public</span> <span class="kt">string</span> <span class="n">Value</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
 
 <p>To get list of resources, first we need to get all resource files by using GetManifestResourceNames method on assembly to which resources are compiled into. In my case it&#39;s Shared assembly.</p>
 
-<div class="highlight"><pre><code class="language-c#" data-lang="c#"><span class="k">typeof</span><span class="p">(</span><span class="n">Shared</span><span class="p">).</span><span class="n">Assembly</span><span class="p">.</span><span class="n">GetManifestResourceNames</span><span class="p">()</span></code></pre></div>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-c#" data-lang="c#">1</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="k">typeof</span><span class="p">(</span><span class="n">Shared</span><span class="p">).</span><span class="n">Assembly</span><span class="p">.</span><span class="n">GetManifestResourceNames</span><span class="p">()</span>
+</pre></div>
+</td></tr></table>
 
 <p>Next we parse resource set name and get all resources for every set. Entire ResourceService class is available below. It will be used within T4 template to generate single JavaScript file per culture.</p>
 
-<div class="highlight"><pre><code class="language-c#" data-lang="c#"><span class="k">public</span> <span class="k">class</span> <span class="nc">ResourceService</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-c#" data-lang="c#"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="k">public</span> <span class="k">class</span> <span class="nc">ResourceService</span>
 <span class="p">{</span>
     <span class="k">private</span> <span class="k">const</span> <span class="kt">string</span> <span class="n">FileNameGroup</span> <span class="p">=</span> <span class="s">&quot;fileName&quot;</span><span class="p">;</span>
 
@@ -151,15 +233,87 @@
 
         <span class="k">return</span> <span class="n">cultures</span><span class="p">.</span><span class="n">Distinct</span><span class="p">().</span><span class="n">ToList</span><span class="p">();</span>
     <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
 
 <p>To generate multiple JavaScript files from the T4 template, we need to use <a href="https://t4toolbox.codeplex.com/">T4Toolbox</a> Visual Studio extension. You can either download it from <a href="https://visualstudiogallery.msdn.microsoft.com/7f9bd62f-2505-4aa4-9378-ee7830371684">Visual Studio Gallery</a> or using extension manager:</p>
 
-<p><img class="img-responsive center-block" src="/img/t4toolboxInstall.f106.jpg" alt="T4 Toolbox" /></p>
+<p><img class="img-responsive center-block" src="/img/t4toolboxInstall.1615.jpg" alt="T4 Toolbox" /></p>
 
 <p>It is possible to do the same without T4Toolbox, but our template would be much bigger, since we would have to not only create many files, but also use Visual Studio automation to add those files to a current project. By using T4Toolbox, it&#39;s no longer a problem, since extension will do the above actions for us. After installation and restart, it&#39;s time to add resource.tt template:</p>
 
-<div class="highlight"><pre><code class="language-c#" data-lang="c#"><span class="p">&lt;</span><span class="err">#@</span> <span class="n">template</span> <span class="n">language</span><span class="p">=</span><span class="s">&quot;C#&quot;</span> <span class="n">debug</span><span class="p">=</span><span class="s">&quot;True&quot;</span> <span class="n">hostspecific</span><span class="p">=</span><span class="s">&quot;True&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-c#" data-lang="c#"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="p">&lt;</span><span class="err">#@</span> <span class="n">template</span> <span class="n">language</span><span class="p">=</span><span class="s">&quot;C#&quot;</span> <span class="n">debug</span><span class="p">=</span><span class="s">&quot;True&quot;</span> <span class="n">hostspecific</span><span class="p">=</span><span class="s">&quot;True&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="err">#@</span> <span class="n">include</span> <span class="n">file</span><span class="p">=</span><span class="s">&quot;T4Toolbox.tt&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="err">#@</span> <span class="n">output</span> <span class="n">extension</span><span class="p">=</span><span class="s">&quot;js&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="err">#@</span> <span class="n">assembly</span> <span class="n">name</span><span class="p">=</span><span class="s">&quot;System.Core&quot;</span> <span class="err">#</span><span class="p">&gt;</span>
@@ -229,7 +383,9 @@
         <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="n">GenerationEnvironment</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span>
     <span class="p">}</span>
 <span class="p">}</span>
-<span class="err">#</span><span class="p">&gt;</span></code></pre></div>
+<span class="err">#</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table>
 
 <p>Now it&#39;s time to add something to resource files and test if everything works fine. To run T4, just save template or use transform all templates option in Visual Studio 2013 menu:</p>
 
@@ -237,7 +393,27 @@
 
 <p>Generated files are named in the same way as the original resources. They have culture name as part of extension, so you can load just specific culture, not all at once. Example file for default culture:</p>
 
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">webSiteCore</span><span class="p">.</span><span class="nx">Resource</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">(){</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-javascript" data-lang="javascript"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="nx">webSiteCore</span><span class="p">.</span><span class="nx">Resource</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">(){</span>
     <span class="kd">var</span> <span class="nx">resources</span> <span class="o">=</span> <span class="p">{</span>
                 <span class="nx">Account</span><span class="o">:</span> <span class="p">{</span>
                     <span class="nx">UsernameCannotBeEmpty</span> <span class="o">:</span> <span class="s1">&#39;Username cannot be empty&#39;</span><span class="p">,</span>
@@ -257,7 +433,9 @@
 
     <span class="k">return</span> <span class="nx">resources</span><span class="p">;</span>
 
-<span class="p">})();</span></code></pre></div>
+<span class="p">})();</span>
+</pre></div>
+</td></tr></table>
 
 <p>With this approach, you can easily minify and bundle JavaScript files before deployment. It&#39;s also possible to use intellisense, since every time you use webSiteCore.Resource object, interpreter knows its definition. If some parts of your application are written purely in JavaScript, you can request dynamic loading of specific languages by using RequireJS. Unfortunately, this solution is not entirely perfect as well. When one of the requirements is to change localized texts after deployment of your application, you will have to regenerate JavaScript files and re upload them to the server. Full example is available on GitHub as a <a href="https://gist.github.com/jmalczak/2c615c10dadb9836cbc5">Gist</a>.</p>
 
