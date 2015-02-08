@@ -4,7 +4,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://developerabroad.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://developerabroad.com/" />
-<updated>2015-01-25T08:25:13+01:00</updated>
+<updated>2015-02-08T10:49:30+01:00</updated>
 <id>http://developerabroad.com/</id>
 <author>
   <name>Jakub Malczak</name>
@@ -223,7 +223,7 @@
 
 &lt;p&gt;To generate multiple JavaScript files from the T4 template, we need to use &lt;a href=&quot;https://t4toolbox.codeplex.com/&quot;&gt;T4Toolbox&lt;/a&gt; Visual Studio extension. You can either download it from &lt;a href=&quot;https://visualstudiogallery.msdn.microsoft.com/7f9bd62f-2505-4aa4-9378-ee7830371684&quot;&gt;Visual Studio Gallery&lt;/a&gt; or using extension manager:&lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;img-responsive center-block&quot; src=&quot;/img/t4toolboxInstall.jpg&quot; alt=&quot;T4 Toolbox&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;img-responsive center-block&quot; src=&quot;/img/t4toolboxInstall.f106.jpg&quot; alt=&quot;T4 Toolbox&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;It is possible to do the same without T4Toolbox, but our template would be much bigger, since we would have to not only create many files, but also use Visual Studio automation to add those files to a current project. By using T4Toolbox, it&amp;#39;s no longer a problem, since extension will do the above actions for us. After installation and restart, it&amp;#39;s time to add resource.tt template:&lt;/p&gt;
 
@@ -373,7 +373,7 @@
 
 &lt;p&gt;Now it&amp;#39;s time to add something to resource files and test if everything works fine. To run T4, just save template or use transform all templates option in Visual Studio 2013 menu:&lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;img-responsive center-block&quot; src=&quot;/img/transformAllT4Templates.png&quot; alt=&quot;Transform All T4 Templates&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;img-responsive center-block&quot; src=&quot;/img/transformAllT4Templates.1baa.png&quot; alt=&quot;Transform All T4 Templates&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Generated files are named in the same way as the original resources. They have culture name as part of extension, so you can load just specific culture, not all at once. Example file for default culture:&lt;/p&gt;
 
