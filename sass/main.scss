@@ -1,3 +1,4 @@
+$icon-font-path: "../_bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 @import '../_bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap';
 @import 'main-navbar';
 @import 'main-footer';
@@ -10,4 +11,8 @@ html, body {
 
 a, a:hover, a:focus {
     color: $mainColorDark;
+}
+
+.ekko-lightbox {
+    padding: 0px!important;
 }

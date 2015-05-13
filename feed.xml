@@ -4,7 +4,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://developerabroad.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://developerabroad.com/" />
-<updated>2015-05-08T06:05:09+02:00</updated>
+<updated>2015-05-13T18:06:15+02:00</updated>
 <id>http://developerabroad.com/</id>
 <author>
   <name>Jakub Malczak</name>
@@ -27,37 +27,52 @@
   
   <content type="html">
   
-    &lt;h3&gt;Planning&lt;/h3&gt;
-
-&lt;p&gt;In early 2014 we spotted a really good deal on tickets to India. Most of the time, you have to pay at least 400 Euro to fly both ways, we have found it for around 220 Euro per person. So the initial plan was to fly from Warsaw to GOA, one of the most known tourist destinations in India. We have been planning, reading and talking to people. Only things we heard were: &amp;quot;be careful&amp;quot;, &amp;quot;India is dirty&amp;quot;, &amp;quot;It&amp;#39;s full of scams&amp;quot; etc. We have got scared and decided to go to Nepal instead. One of the ideas was to trek in Nepal for a couple of days and then come back to India, so Ania could fly home. We have started wondering which trek is the best one for us, and in the end we went with the flow and decided to go for Annapurna Circuit. This was the longest trek, but I wanted to do something spectacular and crossing Thorong La (Thorong La or Thorung La is a mountain pass that stays as the highest pass in the world with an elevation of 5,416 metres) pass was perfect for that. It&amp;#39;s pretty extraordinary to walk over 5 km above the Earth. Most of the treks you can find all over the Internet are at least 12 - 14 days long, and we didn&amp;#39;t have so much time. We have decided to try to do it anyway. &lt;/p&gt;
+    &lt;div id=&quot;content&quot;&gt;
+&lt;h3&gt;Planning&lt;/h3&gt;
+In early 2014 we spotted a really good deal on tickets to India. Most of the time, you have to pay at least 400 Euro to fly both ways, we have found it for around 220 Euro per person. So the initial plan was to fly from Warsaw to GOA, one of the most known tourist destinations in India. We have been planning, reading and talking to people. Only things we heard were: &quot;be careful&quot;, &quot;India is dirty&quot;, &quot;It&#39;s full of scams&quot; etc. We have got scared and decided to go to Nepal instead. One of the ideas was to trek in Nepal for a couple of days and then come back to India, so Ania could fly home. We have started wondering which trek is the best one for us, and in the end we went with the flow and decided to go for Annapurna Circuit. This was the longest trek, but I wanted to do something spectacular and crossing Thorong La (Thorong La or Thorung La is a mountain pass that stays as the highest pass in the world with an elevation of 5,416 metres) pass was perfect for that. It&#39;s pretty extraordinary to walk over 5 km above the Earth. Most of the treks you can find all over the Internet are at least 12 - 14 days long, and we didn&#39;t have so much time. We have decided to try to do it anyway. 
 
 &lt;h3&gt;Flights&lt;/h3&gt;
+Cheap ticket means a lot of flights. We had 4 flights total to get to GOA, and 2 more to get to Kathmandu. First we flew from Warsaw to Frankfurt, next to Chennai in India (also known as Madras). From Chennai where we stayed overnight at the airport, we had a flight to GOA. It wasn&#39;t ordinary flight though. We flew to Bangalore first, where we didn&#39;t leave the plane, but people travelling to Bangalore left and new people joined. It was like a bus stop but made by plane. Weird feeling when everyone leave the plane but you stay and watch cleaning team to do their things. Finally, we arrived in GOA.
 
-&lt;p&gt;Cheap ticket means a lot of flights. We had 4 flights total to get to GOA, and 2 more to get to Kathmandu. First we flew from Warsaw to Frankfurt, next to Chennai in India (also known as Madras). From Chennai where we stayed overnight at the airport, we had a flight to GOA. It wasn&amp;#39;t ordinary flight though. We flew to Bangalore first, where we didn&amp;#39;t leave the plane, but people travelling to Bangalore left and new people joined. It was like a bus stop but made by plane. Weird feeling when everyone leave the plane but you stay and watch cleaning team to do their things. Finally, we arrived in GOA.&lt;/p&gt;
+&lt;a data-gallery=&quot;goa&quot; data-parent=&quot;#content&quot; data-toggle=&quot;lightbox&quot; data-remote=&quot;http://localhost:9000/img/AnnapurnaCircuit/goaAirport.jpg&quot; href=&quot;#&quot; data-footer=&quot;Goa Airport after arrival&quot;&gt;
+    &lt;img class=&quot;img-responsive center-block&quot; src=&quot;http://developerabroad.com/img/AnnapurnaCircuit/min.goaAirport.jpg&quot; alt=&quot;Goa Airport&quot; /&gt;
+    &lt;strong&gt;&lt;p class=&quot;text-center&quot;&gt;Goa Airport after arrival&lt;/p&gt;&lt;/strong&gt;
+&lt;/a&gt;
 
-&lt;p&gt;&lt;img class=&quot;img-responsive center-block&quot; src=&quot;http://developerabroad.com/img/AnnapurnaCircuit/goaAirport.jpg&quot; alt=&quot;Goa Airport&quot; /&gt;
-&lt;strong&gt;&lt;p class=&quot;text-center&quot;&gt;Goa Airport after arrival&lt;/p&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;a data-gallery=&quot;goa&quot; data-parent=&quot;#content&quot; data-toggle=&quot;lightbox&quot; data-remote=&quot;http://localhost:9000/img/AnnapurnaCircuit/aniaWaitingForLuggage.jpg&quot; href=&quot;#&quot; data-footer=&quot;Ania waiting for luggage&quot;&gt;
+    &lt;img class=&quot;img-responsive center-block&quot; src=&quot;http://developerabroad.com/img/AnnapurnaCircuit/min.aniaWaitingForLuggage.jpg&quot; alt=&quot;Ania waiting for luggage&quot; /&gt;
+    &lt;strong&gt;&lt;p class=&quot;text-center&quot;&gt;Ania waiting for luggage&lt;/p&gt;&lt;/strong&gt;
+&lt;/a&gt;
 
-&lt;p&gt;&lt;img class=&quot;img-responsive center-block&quot; src=&quot;http://developerabroad.com/img/AnnapurnaCircuit/aniaWaitingForLuggage.jpg&quot; alt=&quot;Ania waiting for luggage&quot; /&gt;
-&lt;strong&gt;&lt;p class=&quot;text-center&quot;&gt;Ania waiting for luggage&lt;/p&gt;&lt;/strong&gt;&lt;/p&gt;
+India was hot, we known that already since we had to go from one terminal to another in Chennai. But GOA was a completely different story. I would say it was around 37 - 40 centigrades. We had flight to Kathmandu scheduled for the next day early morning, so we have decided to see what GOA has to offer. A quick chat with some people on the airport and we had directions to our place to stay for the next 24 hours. Since we didn&#39;t know anything about GOA we have decided to go to a place called Vasco Da Gamma. We have stayed at Vasco Residency which was one of the cheapest options with AC. The place itself was very shady, we didn&#39;t enjoy the stay too much. Vasco Da Gamma itself at this time of the year was not a tourist place at all.
 
-&lt;p&gt;India was hot, we known that already since we had to go from one terminal to another in Chennai. But GOA was a completely different story. I would say it was around 37 - 40 centigrades. We had flight to Kathmandu scheduled for the next day early morning, so we have decided to see what GOA has to offer. A quick chat with some people on the airport and we had directions to our place to stay for the next 24 hours. Since we didn&amp;#39;t know anything about GOA we have decided to go to a place called Vasco Da Gamma. We have stayed at Vasco Residency which was one of the cheapest options with AC. The place itself was very shady, we didn&amp;#39;t enjoy the stay too much. Vasco Da Gamma itself at this time of the year was not a tourist place at all.&lt;/p&gt;
+&lt;a data-gallery=&quot;goa&quot; data-parent=&quot;#content&quot; data-toggle=&quot;lightbox&quot; data-remote=&quot;http://localhost:9000/img/AnnapurnaCircuit/firstDosa.jpg&quot; href=&quot;#&quot; data-footer=&quot;First Indian food (dosa)&quot;&gt;
+    &lt;img class=&quot;img-responsive center-block&quot; src=&quot;http://developerabroad.com/img/AnnapurnaCircuit/min.firstDosa.jpg&quot; alt=&quot;First Indian food (dosa)&quot; /&gt;
+    &lt;strong&gt;&lt;p class=&quot;text-center&quot;&gt;First Indian food (dosa)&lt;/p&gt;&lt;/strong&gt;
+&lt;/a&gt;
 
-&lt;p&gt;&lt;img class=&quot;img-responsive center-block&quot; src=&quot;http://developerabroad.com/img/AnnapurnaCircuit/firstDosa.jpg&quot; alt=&quot;First Indian food (dosa)&quot; /&gt;
-&lt;strong&gt;&lt;p class=&quot;text-center&quot;&gt;First Indian food (dosa)&lt;/p&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;a data-gallery=&quot;goa&quot; data-parent=&quot;#content&quot; data-toggle=&quot;lightbox&quot; data-remote=&quot;http://localhost:9000/img/AnnapurnaCircuit/localPublicTransport.jpg&quot; href=&quot;#&quot; data-footer=&quot;Local public transport&quot;&gt;
+    &lt;img class=&quot;img-responsive center-block&quot; src=&quot;http://developerabroad.com/img/AnnapurnaCircuit/min.localPublicTransport.jpg&quot; alt=&quot;Local public transport&quot; /&gt;
+    &lt;strong&gt;&lt;p class=&quot;text-center&quot;&gt;Local public transport&lt;/p&gt;&lt;/strong&gt;
+&lt;/a&gt;
 
-&lt;p&gt;&lt;img class=&quot;img-responsive center-block&quot; src=&quot;http://developerabroad.com/img/AnnapurnaCircuit/localPublicTransport.jpg&quot; alt=&quot;Local public transport&quot; /&gt;
-&lt;strong&gt;&lt;p class=&quot;text-center&quot;&gt;Local public transport&lt;/p&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;a data-gallery=&quot;goa&quot; data-parent=&quot;#content&quot; data-toggle=&quot;lightbox&quot; data-remote=&quot;http://localhost:9000/img/AnnapurnaCircuit/goaBeach1.jpg&quot; href=&quot;#&quot; data-footer=&quot;Goa Beach&quot;&gt;
+    &lt;img class=&quot;img-responsive center-block&quot; src=&quot;http://developerabroad.com/img/AnnapurnaCircuit/min.goaBeach1.jpg&quot; alt=&quot;Goa Beach&quot; /&gt;
+    &lt;strong&gt;&lt;p class=&quot;text-center&quot;&gt;Goa Beach&lt;/p&gt;&lt;/strong&gt;
+&lt;/a&gt;
 
-&lt;p&gt;&lt;img class=&quot;img-responsive center-block&quot; src=&quot;http://developerabroad.com/img/AnnapurnaCircuit/goaBeach1.jpg&quot; alt=&quot;Goa Beach&quot; /&gt;
-&lt;strong&gt;&lt;p class=&quot;text-center&quot;&gt;Goa Beach&lt;/p&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;a data-gallery=&quot;goa&quot; data-parent data-toggle=&quot;lightbox&quot; data-remote=&quot;http://localhost:9000/img/AnnapurnaCircuit/goaBeach2.jpg&quot; href=&quot;#&quot; data-footer=&quot;Goa Beach&quot;&gt;
+    &lt;img class=&quot;img-responsive center-block&quot; src=&quot;http://developerabroad.com/img/AnnapurnaCircuit/min.goaBeach2.jpg&quot; alt=&quot;Goa Beach&quot; /&gt;
+    &lt;strong&gt;&lt;p class=&quot;text-center&quot;&gt;Goa Beach&lt;/p&gt;&lt;/strong&gt;
+&lt;/a&gt;
 
-&lt;p&gt;&lt;img class=&quot;img-responsive center-block&quot; src=&quot;http://developerabroad.com/img/AnnapurnaCircuit/goaBeach2.jpg&quot; alt=&quot;Goa Beach&quot; /&gt;
-&lt;strong&gt;&lt;p class=&quot;text-center&quot;&gt;Goa Beach&lt;/p&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;a data-gallery=&quot;goa&quot; data-parent=&quot;#content&quot; data-toggle=&quot;lightbox&quot; data-remote=&quot;http://localhost:9000/img/AnnapurnaCircuit/transportHome.jpg&quot; href=&quot;#&quot; data-footer=&quot;Taking goods home&quot;&gt;
+    &lt;img class=&quot;img-responsive center-block&quot; src=&quot;http://developerabroad.com/img/AnnapurnaCircuit/min.transportHome.jpg&quot; alt=&quot;Taking goods home&quot; /&gt;
+    &lt;strong&gt;&lt;p class=&quot;text-center&quot;&gt;Taking goods home&lt;/p&gt;&lt;/strong&gt;
+&lt;/a&gt;
 
-&lt;p&gt;&lt;img class=&quot;img-responsive center-block&quot; src=&quot;http://developerabroad.com/img/AnnapurnaCircuit/transportHome.jpg&quot; alt=&quot;Taking goods home&quot; /&gt;
-&lt;strong&gt;&lt;p class=&quot;text-center&quot;&gt;Taking goods home&lt;/p&gt;&lt;/strong&gt;
-Early morning the next day we have ordered a cab and went back to the airport. Two more flights and we were in Kathmandu. &lt;/p&gt;
+Early morning the next day we have ordered a cab and went back to the airport. Two more flights and we were in Kathmandu. 
+&lt;/div&gt;
 
   
   &lt;p&gt;&lt;a href=&quot;http://developerabroad.com/travel/2015/05/01/annapurna-circuit-nepal/&quot;&gt;How to complete half of Annapurna Circuit trek in 10 days (Part 1)&lt;/a&gt; was originally published by Jakub Malczak at &lt;a href=&quot;http://developerabroad.com&quot;&gt;Developer Abroad&lt;/a&gt; on May 01, 2015.&lt;/p&gt;</content>
