@@ -4,7 +4,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://developerabroad.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://developerabroad.com/" />
-<updated>2015-05-13T18:06:15+02:00</updated>
+<updated>2015-05-13T18:22:07+02:00</updated>
 <id>http://developerabroad.com/</id>
 <author>
   <name>Jakub Malczak</name>
@@ -34,39 +34,39 @@ In early 2014 we spotted a really good deal on tickets to India. Most of the tim
 &lt;h3&gt;Flights&lt;/h3&gt;
 Cheap ticket means a lot of flights. We had 4 flights total to get to GOA, and 2 more to get to Kathmandu. First we flew from Warsaw to Frankfurt, next to Chennai in India (also known as Madras). From Chennai where we stayed overnight at the airport, we had a flight to GOA. It wasn&#39;t ordinary flight though. We flew to Bangalore first, where we didn&#39;t leave the plane, but people travelling to Bangalore left and new people joined. It was like a bus stop but made by plane. Weird feeling when everyone leave the plane but you stay and watch cleaning team to do their things. Finally, we arrived in GOA.
 
-&lt;a data-gallery=&quot;goa&quot; data-parent=&quot;#content&quot; data-toggle=&quot;lightbox&quot; data-remote=&quot;http://localhost:9000/img/AnnapurnaCircuit/goaAirport.jpg&quot; href=&quot;#&quot; data-footer=&quot;Goa Airport after arrival&quot;&gt;
+&lt;a data-gallery=&quot;goa&quot; data-parent=&quot;#content&quot; data-toggle=&quot;lightbox&quot; href=&quot;/img/AnnapurnaCircuit/goaAirport.jpg&quot; data-footer=&quot;Goa Airport after arrival&quot;&gt;
     &lt;img class=&quot;img-responsive center-block&quot; src=&quot;http://developerabroad.com/img/AnnapurnaCircuit/min.goaAirport.jpg&quot; alt=&quot;Goa Airport&quot; /&gt;
     &lt;strong&gt;&lt;p class=&quot;text-center&quot;&gt;Goa Airport after arrival&lt;/p&gt;&lt;/strong&gt;
 &lt;/a&gt;
 
-&lt;a data-gallery=&quot;goa&quot; data-parent=&quot;#content&quot; data-toggle=&quot;lightbox&quot; data-remote=&quot;http://localhost:9000/img/AnnapurnaCircuit/aniaWaitingForLuggage.jpg&quot; href=&quot;#&quot; data-footer=&quot;Ania waiting for luggage&quot;&gt;
+&lt;a data-gallery=&quot;goa&quot; data-parent=&quot;#content&quot; data-toggle=&quot;lightbox&quot; href=&quot;/img/AnnapurnaCircuit/aniaWaitingForLuggage.jpg&quot; data-footer=&quot;Ania waiting for luggage&quot;&gt;
     &lt;img class=&quot;img-responsive center-block&quot; src=&quot;http://developerabroad.com/img/AnnapurnaCircuit/min.aniaWaitingForLuggage.jpg&quot; alt=&quot;Ania waiting for luggage&quot; /&gt;
     &lt;strong&gt;&lt;p class=&quot;text-center&quot;&gt;Ania waiting for luggage&lt;/p&gt;&lt;/strong&gt;
 &lt;/a&gt;
 
 India was hot, we known that already since we had to go from one terminal to another in Chennai. But GOA was a completely different story. I would say it was around 37 - 40 centigrades. We had flight to Kathmandu scheduled for the next day early morning, so we have decided to see what GOA has to offer. A quick chat with some people on the airport and we had directions to our place to stay for the next 24 hours. Since we didn&#39;t know anything about GOA we have decided to go to a place called Vasco Da Gamma. We have stayed at Vasco Residency which was one of the cheapest options with AC. The place itself was very shady, we didn&#39;t enjoy the stay too much. Vasco Da Gamma itself at this time of the year was not a tourist place at all.
 
-&lt;a data-gallery=&quot;goa&quot; data-parent=&quot;#content&quot; data-toggle=&quot;lightbox&quot; data-remote=&quot;http://localhost:9000/img/AnnapurnaCircuit/firstDosa.jpg&quot; href=&quot;#&quot; data-footer=&quot;First Indian food (dosa)&quot;&gt;
+&lt;a data-gallery=&quot;goa&quot; data-parent=&quot;#content&quot; data-toggle=&quot;lightbox&quot; href=&quot;/img/AnnapurnaCircuit/firstDosa.jpg&quot; data-footer=&quot;First Indian food (dosa)&quot;&gt;
     &lt;img class=&quot;img-responsive center-block&quot; src=&quot;http://developerabroad.com/img/AnnapurnaCircuit/min.firstDosa.jpg&quot; alt=&quot;First Indian food (dosa)&quot; /&gt;
     &lt;strong&gt;&lt;p class=&quot;text-center&quot;&gt;First Indian food (dosa)&lt;/p&gt;&lt;/strong&gt;
 &lt;/a&gt;
 
-&lt;a data-gallery=&quot;goa&quot; data-parent=&quot;#content&quot; data-toggle=&quot;lightbox&quot; data-remote=&quot;http://localhost:9000/img/AnnapurnaCircuit/localPublicTransport.jpg&quot; href=&quot;#&quot; data-footer=&quot;Local public transport&quot;&gt;
+&lt;a data-gallery=&quot;goa&quot; data-parent=&quot;#content&quot; data-toggle=&quot;lightbox&quot; href=&quot;/img/AnnapurnaCircuit/localPublicTransport.jpg&quot; data-footer=&quot;Local public transport&quot;&gt;
     &lt;img class=&quot;img-responsive center-block&quot; src=&quot;http://developerabroad.com/img/AnnapurnaCircuit/min.localPublicTransport.jpg&quot; alt=&quot;Local public transport&quot; /&gt;
     &lt;strong&gt;&lt;p class=&quot;text-center&quot;&gt;Local public transport&lt;/p&gt;&lt;/strong&gt;
 &lt;/a&gt;
 
-&lt;a data-gallery=&quot;goa&quot; data-parent=&quot;#content&quot; data-toggle=&quot;lightbox&quot; data-remote=&quot;http://localhost:9000/img/AnnapurnaCircuit/goaBeach1.jpg&quot; href=&quot;#&quot; data-footer=&quot;Goa Beach&quot;&gt;
+&lt;a data-gallery=&quot;goa&quot; data-parent=&quot;#content&quot; data-toggle=&quot;lightbox&quot; href=&quot;/img/AnnapurnaCircuit/goaBeach1.jpg&quot; data-footer=&quot;Goa Beach&quot;&gt;
     &lt;img class=&quot;img-responsive center-block&quot; src=&quot;http://developerabroad.com/img/AnnapurnaCircuit/min.goaBeach1.jpg&quot; alt=&quot;Goa Beach&quot; /&gt;
     &lt;strong&gt;&lt;p class=&quot;text-center&quot;&gt;Goa Beach&lt;/p&gt;&lt;/strong&gt;
 &lt;/a&gt;
 
-&lt;a data-gallery=&quot;goa&quot; data-parent data-toggle=&quot;lightbox&quot; data-remote=&quot;http://localhost:9000/img/AnnapurnaCircuit/goaBeach2.jpg&quot; href=&quot;#&quot; data-footer=&quot;Goa Beach&quot;&gt;
+&lt;a data-gallery=&quot;goa&quot; data-parent data-toggle=&quot;lightbox&quot; href=&quot;/img/AnnapurnaCircuit/goaBeach2.jpg&quot; data-footer=&quot;Goa Beach&quot;&gt;
     &lt;img class=&quot;img-responsive center-block&quot; src=&quot;http://developerabroad.com/img/AnnapurnaCircuit/min.goaBeach2.jpg&quot; alt=&quot;Goa Beach&quot; /&gt;
     &lt;strong&gt;&lt;p class=&quot;text-center&quot;&gt;Goa Beach&lt;/p&gt;&lt;/strong&gt;
 &lt;/a&gt;
 
-&lt;a data-gallery=&quot;goa&quot; data-parent=&quot;#content&quot; data-toggle=&quot;lightbox&quot; data-remote=&quot;http://localhost:9000/img/AnnapurnaCircuit/transportHome.jpg&quot; href=&quot;#&quot; data-footer=&quot;Taking goods home&quot;&gt;
+&lt;a data-gallery=&quot;goa&quot; data-parent=&quot;#content&quot; data-toggle=&quot;lightbox&quot; href=&quot;/img/AnnapurnaCircuit/transportHome.jpg&quot; data-footer=&quot;Taking goods home&quot;&gt;
     &lt;img class=&quot;img-responsive center-block&quot; src=&quot;http://developerabroad.com/img/AnnapurnaCircuit/min.transportHome.jpg&quot; alt=&quot;Taking goods home&quot; /&gt;
     &lt;strong&gt;&lt;p class=&quot;text-center&quot;&gt;Taking goods home&lt;/p&gt;&lt;/strong&gt;
 &lt;/a&gt;
