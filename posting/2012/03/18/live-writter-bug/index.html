@@ -7,8 +7,8 @@
     <meta name="description" content="How to fix Wordpress 3.2.1 and Windows Live Writter blog discovery bug." />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link type="text/plain" rel="author" href="/humans.txt" />
-    <link rel="stylesheet" href="/css/main.db85.css">
-    <script data-main="/js/main.c979" src="/_bower_components/requirejs/require.js"></script>
+    <link rel="stylesheet" href="/css/main.css">
+    <script data-main="/js/main" src="/_bower_components/requirejs/require.js"></script>
     <!--
       Nice that someone is reading the markup. If you would like to hire me, or you need people for
       any cool project. Please don't hesitate to contact me. To get my e-mail address, please open 
@@ -18,7 +18,7 @@
     -->
   </head>
   <body>
-  <div class="ribbon-left">Currently in<br/><b>Varkala, India</b></div>
+  <div class="ribbon-left">Currently in<br/><b>Chengdu, China</b></div>
     <main class="page-content">
     <nav class="top" id="menu-mobile-open" >
     <div class="menu-mobile-toggle">
@@ -39,7 +39,7 @@
             <h1>Wordpress 3.2.1 and Windows Live Writter bug.</h1>
             <p>by <strong>Jakub Malczak</strong> &#8212;
             
-             <strong><time datetime="2012-03-18T00:00:00+05:30">18 Mar 2012</time></strong>
+             <strong><time datetime="2012-03-18T00:00:00+08:00">18 Mar 2012</time></strong>
             </p>
         </div>
     </header>
@@ -60,13 +60,13 @@ Finally I have managed to find a solution to my problems. At a first sight it di
 For some reason Wordpress sends incorrect response length during invocation of getUserBlogs method. The way to fix it is to edit class-IXR.php file, located under wp-includes. 
 You have to locate following line:</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-html" data-lang="html">1</code></pre></div></td><td class="code"><div class="highlight"><pre>header(<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;str&quot;</span><span class="nt">&gt;</span>&#39;Content-Length: &#39;<span class="nt">&lt;/span&gt;</span>.$length);
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-html" data-lang="404.html">1</code></pre></div></td><td class="code"><div class="highlight"><pre>header(<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;str&quot;</span><span class="nt">&gt;</span>&#39;Content-Length: &#39;<span class="nt">&lt;/span&gt;</span>.$length);
 </pre></div>
 </td></tr></table>
 
 <p>and replace it with:</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-html" data-lang="html">1</code></pre></div></td><td class="code"><div class="highlight"><pre>header(<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;str&quot;</span><span class="nt">&gt;</span>&#39;Content-Length: &#39;<span class="nt">&lt;/span&gt;</span>.$length + 2);
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-html" data-lang="404.html">1</code></pre></div></td><td class="code"><div class="highlight"><pre>header(<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;str&quot;</span><span class="nt">&gt;</span>&#39;Content-Length: &#39;<span class="nt">&lt;/span&gt;</span>.$length + 2);
 </pre></div>
 </td></tr></table>
 

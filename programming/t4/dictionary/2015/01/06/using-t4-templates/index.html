@@ -7,8 +7,8 @@
     <meta name="description" content="How to use Microsoft T4 templating engine to generate C# dictionary classes from SQL table values." />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link type="text/plain" rel="author" href="/humans.txt" />
-    <link rel="stylesheet" href="/css/main.db85.css">
-    <script data-main="/js/main.c979" src="/_bower_components/requirejs/require.js"></script>
+    <link rel="stylesheet" href="/css/main.css">
+    <script data-main="/js/main" src="/_bower_components/requirejs/require.js"></script>
     <!--
       Nice that someone is reading the markup. If you would like to hire me, or you need people for
       any cool project. Please don't hesitate to contact me. To get my e-mail address, please open 
@@ -18,7 +18,7 @@
     -->
   </head>
   <body>
-  <div class="ribbon-left">Currently in<br/><b>Varkala, India</b></div>
+  <div class="ribbon-left">Currently in<br/><b>Chengdu, China</b></div>
     <main class="page-content">
     <nav class="top" id="menu-mobile-open" >
     <div class="menu-mobile-toggle">
@@ -39,7 +39,7 @@
             <h1>Using T4 templates to generate C# dictionary from SQL table values.</h1>
             <p>by <strong>Jakub Malczak</strong> &#8212;
             
-             <strong><time datetime="2015-01-06T00:00:00+05:30">06 Jan 2015</time></strong>
+             <strong><time datetime="2015-01-06T00:00:00+08:00">06 Jan 2015</time></strong>
             </p>
         </div>
     </header>
@@ -96,7 +96,7 @@
 
 <p>Next step is to create T4 template to generate C# classes based on data in dictionary table. We need a way to tell our template which tables are the dictionary tables and which column will be used as Id and which one as Name. Simple XML file can hold that information:</p>
 
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-xml" data-lang="xml">1
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-xml" data-lang="feed.xml">1
 2
 3
 4</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span>
