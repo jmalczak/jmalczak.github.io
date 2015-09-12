@@ -1,7 +1,11 @@
 @import "_base";
 
+nav.top {
+    color: $menuColor;
+}
+
 nav.top .navbar {
-    @media (min-width: $small) {
+    @media(min-width: 950px) {
         float: right;
     }
 }
@@ -15,7 +19,7 @@ nav.top ul.navbar {
     }
     margin-bottom: 0px;
     padding-left: 1px;
-    min-height: 30px;
+    min-height: 45px;
 }
 
 nav.top .navbar li {
@@ -25,9 +29,18 @@ nav.top .navbar li {
     @media (max-width: $small) {
         text-align: center;
     }
+    margin-top: 10px;
     display: block;
-    padding-right: 15px;
-    font-size: 1.5em;
+    font-size: 1.3em;
+}
+
+nav.top .navbar a {
+    padding-left: 35px;
+    color: $menuColor;
+}
+
+nav.top .navbar a:hover {
+    text-decoration: underline;
 }
 
 nav.top {
@@ -63,4 +76,39 @@ nav.top {
     @media (max-width: $small){
         display: block;
     }
+}
+
+#nav-wrapper {
+    margin: auto;
+}
+
+#site-name {
+    margin: auto;
+    text-align: center;
+}
+
+#nav-menu-wrapper {
+    margin: auto;
+    clear: both;
+
+    @media (min-width: 950px){
+        padding-left: 120px;
+        padding-right: 110px;
+    }
+
+    @media (max-width: 950px) {
+        width:450px;
+    }
+}
+
+#site-name {
+    @media (max-width: 950px){
+        display: none;
+    }
+ 
+    float: left;
+    font-size: 2em;
+    font-style: italic;
+    font-size: 1.8em;
+    padding-top: 5px;
 }

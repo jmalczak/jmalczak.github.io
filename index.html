@@ -12,7 +12,7 @@
     <!--
       Nice that someone is reading the markup. If you would like to hire me, or you need people for
       any cool project. Please don't hesitate to contact me. To get my e-mail address, please open 
-      JavaScrip console and run function getDetails();
+      JavaScript console and run function getDetails();
 
       Best regards
     -->
@@ -34,23 +34,33 @@
         </div>
     </div>
 </div>
-<main class="content">
+<main id="page-content" class="content">
     <nav class="top" id="menu-mobile-open" >
-    <div class="menu-mobile-toggle">
-        <a href="#menu-mobile-open" class="menu-mobile-open"><span><i class="fa fa-bars"></i></span></a>
-        <a id="menu-mobile-close" href="#menu-mobile-close" class="menu-mobile-close"><span><i class="fa fa-times"></i></span></a>
+    <div id="nav-wrapper">
+       <div class="menu-mobile-toggle">
+            <a href="#menu-mobile-open" class="menu-mobile-open"><span><i class="fa fa-bars"></i></span></a>
+            <a id="menu-mobile-close" href="#menu-mobile-close" class="menu-mobile-close"><span><i class="fa fa-times"></i></span></a>
+        </div>
+        <div id="nav-menu-wrapper">
+            <div id="site-name">
+                { developer : '<span class="accent">abroad</span>' }
+            </div>
+            <ul class="navbar">
+                <li><a href="http://developerabroad.com">home</a></li>
+                <li><a href="http://developerabroad.com">world tour</a></li>
+                <li><a href="http://developerabroad.com/about/">about me</a></li>
+                <li><a href="/feed.xml">news feed</a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
     </div>
-    <ul class="navbar">
-        <li><a href="http://developerabroad.com">Home</a></li>
-        <li><a href="http://developerabroad.com/about/">About</a></li>
-        <li><a href="/feed.xml">Feed</a></li>
-    </ul>
-    <div class="clearfix"></div>
 </nav>
+
     <div class="container">
         
         <article class="row post">
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <span>
                 <time datetime="2015-01-11T00:00:00+08:00">
                 <span class="day">
@@ -62,7 +72,7 @@
                 </time>
                 </span>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-11">
                 <header>
                     <h3 class="post-title">
                     <a href="http://developerabroad.com/programming/t4/resources/localization/2015/01/11/dot-net-resources-from-javascript/">
@@ -72,13 +82,33 @@
                 </header>
                 <p>Problem It is often the case, that you would like to use the same set of resources from both, server side and client side code. There is a couple of solutions to this problem, which I am going to describe briefly. HTTP handler or lightweight service You can find an example of HTTP handler implementation on Rick Strahl web page....</p>
                 <div>
-                    <span class="post-tags"><a href="http://developerabroad.com/categories/index.html#programmingt4resourceslocalization" title="Other posts from the Programming category">Programming</a></span>&nbsp;<span class="post-tags"><a href="http://developerabroad.com/categories/index.html#programmingt4resourceslocalization" title="Other posts from the T4 category">T4</a></span>&nbsp;<span class="post-tags"><a href="http://developerabroad.com/categories/index.html#programmingt4resourceslocalization" title="Other posts from the Resources category">Resources</a></span>&nbsp;<span class="post-tags"><a href="http://developerabroad.com/categories/index.html#programmingt4resourceslocalization" title="Other posts from the Localization category">Localization</a></span>
+                    
+                        <span class="post-tags">
+                            <a href="http://developerabroad.com/categories/index.html#programmingt4resourceslocalization" 
+                               title="Other posts from the Programming category">Programming</a>
+                       </span>
+                    &nbsp;
+                        <span class="post-tags">
+                            <a href="http://developerabroad.com/categories/index.html#programmingt4resourceslocalization" 
+                               title="Other posts from the T4 category">T4</a>
+                       </span>
+                    &nbsp;
+                        <span class="post-tags">
+                            <a href="http://developerabroad.com/categories/index.html#programmingt4resourceslocalization" 
+                               title="Other posts from the Resources category">Resources</a>
+                       </span>
+                    &nbsp;
+                        <span class="post-tags">
+                            <a href="http://developerabroad.com/categories/index.html#programmingt4resourceslocalization" 
+                               title="Other posts from the Localization category">Localization</a>
+                       </span>
+                    
                 </div>
             </div>
         </article>
         
         <article class="row post">
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <span>
                 <time datetime="2015-01-06T00:00:00+08:00">
                 <span class="day">
@@ -90,7 +120,7 @@
                 </time>
                 </span>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-11">
                 <header>
                     <h3 class="post-title">
                     <a href="http://developerabroad.com/programming/t4/dictionary/2015/01/06/using-t4-templates/">
@@ -100,13 +130,28 @@
                 </header>
                 <p>When you store your data in a SQL relational database, it&#39;s always worth considering whether to have your dictionary entries not only in C# code, but in database as well. Thanks to that you can keep referential integrity between your data. Let me show you an example. If we would like to model our User table in the following way:...</p>
                 <div>
-                    <span class="post-tags"><a href="http://developerabroad.com/categories/index.html#programmingt4dictionary" title="Other posts from the Programming category">Programming</a></span>&nbsp;<span class="post-tags"><a href="http://developerabroad.com/categories/index.html#programmingt4dictionary" title="Other posts from the T4 category">T4</a></span>&nbsp;<span class="post-tags"><a href="http://developerabroad.com/categories/index.html#programmingt4dictionary" title="Other posts from the Dictionary category">Dictionary</a></span>
+                    
+                        <span class="post-tags">
+                            <a href="http://developerabroad.com/categories/index.html#programmingt4dictionary" 
+                               title="Other posts from the Programming category">Programming</a>
+                       </span>
+                    &nbsp;
+                        <span class="post-tags">
+                            <a href="http://developerabroad.com/categories/index.html#programmingt4dictionary" 
+                               title="Other posts from the T4 category">T4</a>
+                       </span>
+                    &nbsp;
+                        <span class="post-tags">
+                            <a href="http://developerabroad.com/categories/index.html#programmingt4dictionary" 
+                               title="Other posts from the Dictionary category">Dictionary</a>
+                       </span>
+                    
                 </div>
             </div>
         </article>
         
         <article class="row post">
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <span>
                 <time datetime="2014-11-15T00:00:00+08:00">
                 <span class="day">
@@ -118,7 +163,7 @@
                 </time>
                 </span>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-11">
                 <header>
                     <h3 class="post-title">
                     <a href="http://developerabroad.com/programming/2014/11/15/process-killer/">
@@ -128,13 +173,18 @@
                 </header>
                 <p>I had some issues with my Elan Microelectronics notebook touchpad after upgrade to Windows 8. I have downloaded drivers for my old Samsung QX-410 notebook from original Samsung homepage. Unfortunately last supported operating system is Windows 7, so I had not much choice but use those drivers. Apparently they work fine for most of the time, bu sometimes ETDCtrl process...</p>
                 <div>
-                    <span class="post-tags"><a href="http://developerabroad.com/categories/index.html#programming" title="Other posts from the Programming category">Programming</a></span>
+                    
+                        <span class="post-tags">
+                            <a href="http://developerabroad.com/categories/index.html#programming" 
+                               title="Other posts from the Programming category">Programming</a>
+                       </span>
+                    
                 </div>
             </div>
         </article>
         
         <article class="row post">
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <span>
                 <time datetime="2014-11-12T00:00:00+08:00">
                 <span class="day">
@@ -146,7 +196,7 @@
                 </time>
                 </span>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-11">
                 <header>
                     <h3 class="post-title">
                     <a href="http://developerabroad.com/programming/2014/11/12/attachtow3wp-change/">
@@ -156,13 +206,18 @@
                 </header>
                 <p>There is very cool Visual Studio extension available in Visual Studio Gallery. It&#39;s called AttachToW3WP, you can grab it here. What it does is, it allows you to attach visual studio debugger process to IIS worker process for debugging purposes. You can do all those steps manually, by using Debug -&gt; Attach To menu, but it&#39;s just much more convenient...</p>
                 <div>
-                    <span class="post-tags"><a href="http://developerabroad.com/categories/index.html#programming" title="Other posts from the Programming category">Programming</a></span>
+                    
+                        <span class="post-tags">
+                            <a href="http://developerabroad.com/categories/index.html#programming" 
+                               title="Other posts from the Programming category">Programming</a>
+                       </span>
+                    
                 </div>
             </div>
         </article>
         
         <article class="row post">
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <span>
                 <time datetime="2012-08-15T00:00:00+08:00">
                 <span class="day">
@@ -174,7 +229,7 @@
                 </time>
                 </span>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-11">
                 <header>
                     <h3 class="post-title">
                     <a href="http://developerabroad.com/programming/2012/08/15/ssas-attribute/">
@@ -191,13 +246,18 @@ http://ms-olap.blogspot.com/2009/11/duplicate-attribute-key-has-been-found.html
 
 </p>
                 <div>
-                    <span class="post-tags"><a href="http://developerabroad.com/categories/index.html#programming" title="Other posts from the Programming category">Programming</a></span>
+                    
+                        <span class="post-tags">
+                            <a href="http://developerabroad.com/categories/index.html#programming" 
+                               title="Other posts from the Programming category">Programming</a>
+                       </span>
+                    
                 </div>
             </div>
         </article>
         
         <article class="row post">
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <span>
                 <time datetime="2012-03-18T00:00:00+08:00">
                 <span class="day">
@@ -209,7 +269,7 @@ http://ms-olap.blogspot.com/2009/11/duplicate-attribute-key-has-been-found.html
                 </time>
                 </span>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-11">
                 <header>
                     <h3 class="post-title">
                     <a href="http://developerabroad.com/posting/2012/03/18/live-writter-bug/">
@@ -219,7 +279,12 @@ http://ms-olap.blogspot.com/2009/11/duplicate-attribute-key-has-been-found.html
                 </header>
                 <p>Lately I was trying to configure Wordpress 3.2.1 to work with Windows Live Writer. If you don’t know Windows Live Writer yet, it is a part of Windows Live Essentials pack and it allow you to publish blog posts using Plain Old Desktop Application (I love acronyms! and PODA sounds quite cool). Problem I have noticed that apparently something has...</p>
                 <div>
-                    <span class="post-tags"><a href="http://developerabroad.com/categories/index.html#posting" title="Other posts from the Posting category">Posting</a></span>
+                    
+                        <span class="post-tags">
+                            <a href="http://developerabroad.com/categories/index.html#posting" 
+                               title="Other posts from the Posting category">Posting</a>
+                       </span>
+                    
                 </div>
             </div>
         </article>
@@ -231,6 +296,7 @@ http://ms-olap.blogspot.com/2009/11/duplicate-attribute-key-has-been-found.html
         </nav>
     </div>
 </main>
+
     <footer class="footer">
     <div class="copyright">
         Proudly published with <a class="icon-ghost" href="http://jekyllrb.com/">Jekyll, Grunt, RequireJs and many more.</a>

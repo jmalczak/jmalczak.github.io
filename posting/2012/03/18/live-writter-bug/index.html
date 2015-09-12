@@ -12,26 +12,36 @@
     <!--
       Nice that someone is reading the markup. If you would like to hire me, or you need people for
       any cool project. Please don't hesitate to contact me. To get my e-mail address, please open 
-      JavaScrip console and run function getDetails();
+      JavaScript console and run function getDetails();
 
       Best regards
     -->
   </head>
   <body>
   <div class="ribbon-left">Currently in<br/><b>Chengdu, China</b></div>
-    <main class="page-content">
+    <main id="page-content" class="page-content">
     <nav class="top" id="menu-mobile-open" >
-    <div class="menu-mobile-toggle">
-        <a href="#menu-mobile-open" class="menu-mobile-open"><span><i class="fa fa-bars"></i></span></a>
-        <a id="menu-mobile-close" href="#menu-mobile-close" class="menu-mobile-close"><span><i class="fa fa-times"></i></span></a>
+    <div id="nav-wrapper">
+       <div class="menu-mobile-toggle">
+            <a href="#menu-mobile-open" class="menu-mobile-open"><span><i class="fa fa-bars"></i></span></a>
+            <a id="menu-mobile-close" href="#menu-mobile-close" class="menu-mobile-close"><span><i class="fa fa-times"></i></span></a>
+        </div>
+        <div id="nav-menu-wrapper">
+            <div id="site-name">
+                { developer : '<span class="accent">abroad</span>' }
+            </div>
+            <ul class="navbar">
+                <li><a href="http://developerabroad.com">home</a></li>
+                <li><a href="http://developerabroad.com">world tour</a></li>
+                <li><a href="http://developerabroad.com/about/">about me</a></li>
+                <li><a href="/feed.xml">news feed</a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
     </div>
-    <ul class="navbar">
-        <li><a href="http://developerabroad.com">Home</a></li>
-        <li><a href="http://developerabroad.com/about/">About</a></li>
-        <li><a href="/feed.xml">Feed</a></li>
-    </ul>
-    <div class="clearfix"></div>
 </nav>
+
     <div class="container">
         <article>
     <header>
@@ -103,6 +113,7 @@ You have to locate following line:</p>
 
     </div>
 </main>
+
     <footer class="footer">
     <div class="copyright">
         Proudly published with <a class="icon-ghost" href="http://jekyllrb.com/">Jekyll, Grunt, RequireJs and many more.</a>
