@@ -3,14 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Developer Abroad - How can I help you Get Things Done</title>
+    <title>Developer Abroad - Visited places</title>
     <meta name="description" content="Jakub Malczak software developer, freelancer. Microsoft .NET expert" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link type="text/plain" rel="author" href="/humans.txt" />
     <link rel="stylesheet" href="/css/main.css">
-    
+    <link href="/css/map/map.css" rel="stylesheet" />
+<link href="/_bower_components/mapbox.js/mapbox.css" rel="stylesheet" />
+
     <script data-main="/js/shared/main" src="/_bower_components/requirejs/require.js"></script>
-    
+    <script src="/js/map/map.js" type="text/javascript"></script>
+
     <!--
       Nice that someone is reading the markup. If you would like to hire me, or you need people for
       any cool project. Please don't hesitate to contact me. To get my e-mail address, please open 
@@ -22,7 +25,7 @@
   <body>
   <div class="ribbon-left">Currently in<br/><b>Jeju, South Korea</b></div>
     <main id="page-content" class="page-content">
-    <nav class="top" id="menu-mobile-open" >
+<nav class="top" id="menu-mobile-open" >
     <div id="nav-wrapper">
         <div class="menu-mobile-toggle">
             <a href="#menu-mobile-open" class="menu-mobile-open"><span><i class="fa fa-bars"></i></span></a>
@@ -46,40 +49,27 @@
     </div>
 </nav>
 
-    <div class="container">
-        <article>
-<header>
-    <h1>How can I help you Get Things Done</h1>
-</header>
-<div class="about-author-image">
+<div id="map">
 </div>
-<div>
-    <p>Hi, I am <b >Jakub</b>. A traveling software developer currently working with <b >Microsoft .NET</b> platform to deliver <b >ASP.NET MVC</b> web applications. Besides .NET I enjoy working with dynamic languages like <b >Python</b> or <b>Ruby</b> which I use for my personal projects. Lately a big fan of <b >F#</b> functional language. You can find me on twitter <a  href="https://twitter.com/malczu"><b>@malczu</b></a>, <a href="https://linkedin.com/in/jakubmalczak"><b>LinkedIn</b></a> or <a  href="https://github.com/jmalczak"><b>GitHub</b></a>.</p>
-    <p>I have been building software for many companies, including <a href="http://www.vistex.com/" ><b>Hawkeye</b></a> (now known as Vistex), <a href="http://www.mbank.pl/" ><b>BRE Bank</b></a> (now known as mBank) and <a href="http://www.samsung.com/" ><b>Samsung</b></a>. During this time I developed applications processing the huge volumes of data and used globally.</p>
-    <p>If you need any help with one of the following, don't hesitate to drop me a line!</p>
-    <p>
-    <ul>
-        <li>
-            <h4>Microsoft .NET development</h4>
-            Full software life cycle. Starting from early design phases, up to maintenance after deployment. I can deliver the Windows Apps, Web Apps and custom components. I have been working with the Windows Forms, WPF, ASP.NET Web Forms, ASP.NET MVC, NancyFx and others.
-        </li>
-        <li>
-            <h4>Web Sites</h4>
-            I have been developing web sites not only in ASP.NET, but also in PHP (mostly on WordPress) as well as Single Page Applications. I am proficient in using JavaScript and frameworks like RequireJS, jQuery, Knockout.JS.
-        </li>
-        <li>
-            <h4>Deployment</h4>
-            If you need your app deployed on Windows, Linux or in the Cloud. I can help you with that, as well as with automation of deployment projects using Powershell, Bash scripts. I have been using shell scripts in connection with MsBuild, Rake, Npm and Gulp in order to build and deploy applications automatically. I have experience with Microsoft TFS and JIRA solutions.
-        </li>
-    </ul>
-    </p>
-    <p>
-    	My full profile is available on <a  href="https://linkedin.com/in/jakubmalczak"><b>LinkedIn</b></a> or you can download it as <a  href="https://dl.dropboxusercontent.com/u/1141130/CV%20english.pdf"><b>PDF</b></a>.
-    </p>
-</div>
-</article>
-
+<div class="container" id="countries">
+    <div class="row">
+        <div data-bind="foreach: continents" class="col-md-12">
+            <div class="media">
+                <div class="media-left">
+                    <img class="media-object" 
+                         data-bind="attr: { alt: name, src: '/img/world/'+ img }">
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading"><b data-bind="text: name"></b></h4>
+                    <span data-bind="foreach: countries">
+                        <b data-bind="text: name"></b>: 
+                        <span data-bind="text: description"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 </main>
 
     <footer class="footer">
