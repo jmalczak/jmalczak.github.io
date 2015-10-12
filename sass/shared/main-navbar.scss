@@ -35,8 +35,11 @@ nav.top .navbar li {
 }
 
 nav.top .navbar a {
-    padding-left: 35px;
     color: $menuColor;
+    
+    @media (min-width: $small) {
+        padding-left: 35px;
+    }
 }
 
 nav.top .navbar a:hover {
