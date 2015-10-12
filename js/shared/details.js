@@ -1,0 +1,1 @@
+define([],function(){window.getDetails=function(){var a="---------------------------",b="==   DEVELOPER ABROAD    ==",c="---------------------------\n",d="		Jakub Malczak",e="		jmalczak",f="@",g="gmail.com";console.log(a),console.log(b),console.log(c),console.log(d),console.log(e+f+g),console.log(a)}});

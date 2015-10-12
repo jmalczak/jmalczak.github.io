@@ -1,0 +1,1 @@
+define(["ekkolightbox","jquery"],function(a,b){var c=function(){var a=this;a.init=function(){b(document).ready(function(){b(document).delegate('*[data-toggle="lightbox"]',"click",function(a){a.preventDefault(),b(this).ekkoLightbox(),b(".ekko-lightbox").css("padding-right",0)})})}};return new c});
