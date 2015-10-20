@@ -4,13 +4,81 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://developerabroad.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://developerabroad.com/" />
-<updated>2015-10-12T19:02:22+09:00</updated>
+<updated>2015-10-20T13:12:19+09:00</updated>
 <id>http://developerabroad.com/</id>
 <author>
   <name>Jakub Malczak</name>
   <uri>http://developerabroad.com/</uri>
   <email>jmalczak@gmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Poor man's C# grunt-init.]]></title>
+  <link rel="alternate" type="text/html" href="http://developerabroad.com/programming/c%23/2015/10/18/poor-mans-csharp-grunt-init/"/>
+  <id>http://developerabroad.com/programming/c%23/2015/10/18/poor-mans-csharp-grunt-init</id>
+  <published>2015-10-18T00:00:00+09:00</published>
+  <updated>2015-10-18T00:00:00+09:00</updated>
+  <author>
+    <name>Jakub Malczak</name>
+    <uri>http://developerabroad.com</uri>
+    <email>jmalczak@gmail.com</email>
+  </author>
+  
+  <content type="html">
+  
+    &lt;h3&gt;Project Bootstrap Idea&lt;/h3&gt;
+
+&lt;p&gt;Unfortunately, I couldn&amp;#39;t be on DevDay 2015 conference. But I was watching all videos recommended by
+other developers. One of the talks I really liked was &amp;quot;From Homogeneous Monolith to Radically 
+Heterogeneous Microservices Architecture&amp;quot; by Chad Fowler. If you haven&amp;#39;t seen it, you can find
+youtube video below.
+&lt;div class=&quot;embed-responsive embed-responsive-16by9 margin-small&quot;&gt;
+    &lt;iframe src=&quot;https://www.youtube.com/embed/v17DMiFHnB8&quot; 
+            allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+Chad is talking about move from monolith to microservices architecture they did in Wunderlist. When
+defining microservices they put constraint on service size. In Wunderlist size of newly created
+service should fit on one screen. This is quite radical, but it works for them based on the Chad&amp;#39;s
+talk. To be able to bootstrap services quickly they have created microservice template so creating
+new service is as easy as clonning it from template and adding some business logic. So I thought
+that this is quite useful.&lt;/p&gt;
+
+&lt;h3&gt;Microservices in my current project&lt;/h3&gt;
+
+&lt;p&gt;I use microservices in my current project as well. We don&amp;#39;t have any specific constraint on service
+size. We just try to be pragmatic and when it grows too large we extract smaller services. Anyway
+we end up creating services very often. And since we mostly use the same set of components to build
+service we waste a lot of time on task which may be automated in the same way Chad did it.&lt;/p&gt;
+
+&lt;h3&gt;Grunt-init approach&lt;/h3&gt;
+
+&lt;p&gt;There is already a tool for that, that use node.js. It&amp;#39;s called &lt;a href=&quot;http://gruntjs.com/project-scaffolding&quot;&gt;grunt-init&lt;/a&gt;.
+and you can use it to bootstrap different kinds of projects. This is an example how you use it to
+bootstrap C# project: &lt;a href=&quot;https://github.com/nosami/grunt-init-csharpsolution&quot;&gt;grunt-init-csharpsolution&lt;/a&gt;.
+Grunt-init just ask you for values needed to bootstrap project and then rename files and replace
+values in solution directory. That&amp;#39;s easy. But due to the variable replacement format &lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;{%= nametoreplace %}
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;you cannot open template solution in Visual Studio since replacement value contains some illegal
+C# characters. And I have found really convenient to be able to edit template in Visual Studio so yoou
+don&amp;#39;t have to mess with csproj, sln files.&lt;/p&gt;
+
+&lt;h3&gt;Poor man&amp;#39;s powershell grunt-init replacement&lt;/h3&gt;
+
+&lt;p&gt;To be able to open template in Visual Studio. I have used PROJECT_NAME as a variable replacement key 
+and in connection with simple PowerShell script you can do the same thing. Below you can see how it 
+works in practice.
+&lt;img class=&quot;img-responsive center-block padding-small&quot; src=&quot;http://developerabroad.com/img/poormansgruntinit/powershell-init-csharp-web.gif&quot; alt=&quot;Poor man&#39;s powershell grunt-init&quot; /&gt;
+You can check out example source code on &lt;a href=&quot;https://github.com/jmalczak/powershell-init-csharp-web&quot;&gt;here&lt;/a&gt; 
+on github. Feel free to fork and and make your own changes. &lt;/p&gt;
+
+  
+  &lt;p&gt;&lt;a href=&quot;http://developerabroad.com/programming/c%23/2015/10/18/poor-mans-csharp-grunt-init/&quot;&gt;Poor man's C# grunt-init.&lt;/a&gt; was originally published by Jakub Malczak at &lt;a href=&quot;http://developerabroad.com&quot;&gt;Developer Abroad&lt;/a&gt; on October 18, 2015.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Developer Abroad - Poor man's C# grunt-init.</title>
+    <meta name="description" content="Poor man's C# grunt-init alternative to bootstrap C# WebApi service." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link type="text/plain" rel="author" href="/humans.txt" />
+    <link rel="stylesheet" href="/css/main.css">
+    
+    <script data-main="/js/shared/main" src="/_bower_components/requirejs/require.js"></script>
+    
+    <!--
+      Nice that someone is reading the markup. If you would like to hire me, or you need people for
+      any cool project. Please don't hesitate to contact me. To get my e-mail address, please open 
+      JavaScript console and run function getDetails();
+
+      Best regards
+    -->
+  </head>
+  <body>
+  <div class="ribbon-left">Currently in<br/><b>Jeju, South Korea</b></div>
+    <main id="page-content" class="page-content">
+    <nav class="top" id="menu-mobile-open" >
+    <div id="nav-wrapper">
+        <div class="menu-mobile-toggle">
+            <a href="#menu-mobile-open" class="menu-mobile-open"><span><i class="fa fa-bars"></i></span></a>
+            <a id="menu-mobile-close" href="#menu-mobile-close" class="menu-mobile-close"><span><i class="fa fa-times"></i></span></a>
+        </div>
+        <div id="nav-menu-wrapper">
+            <div id="site-name">
+                <a href="http://developerabroad.com">
+                    { developer : '<span class="accent">abroad</span>' }
+                </a>
+            </div>
+            <ul class="navbar">
+                <li><a href="http://developerabroad.com">HOME</a></li>
+                <li><a href="http://developerabroad.com/#page-content">POSTS</a></li>
+                <li><a href="http://developerabroad.com/map/">PLACES</a></li>
+                <li><a href="http://developerabroad.com/about/">ABOUT</a></li>
+                <li><a href="/feed.xml">NEWS FEED</a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</nav>
+
+    <div class="container">
+        <article>
+    <header>
+        <div>
+            <h1>Poor man's C# grunt-init.</h1>
+            <p>by <strong>Jakub Malczak</strong> &#8212;
+            
+             <strong><time datetime="2015-10-18T00:00:00+09:00">18 Oct 2015</time></strong>
+            </p>
+        </div>
+    </header>
+    <div>
+        <h3>Project Bootstrap Idea</h3>
+
+<p>Unfortunately, I couldn&#39;t be on DevDay 2015 conference. But I was watching all videos recommended by
+other developers. One of the talks I really liked was &quot;From Homogeneous Monolith to Radically 
+Heterogeneous Microservices Architecture&quot; by Chad Fowler. If you haven&#39;t seen it, you can find
+youtube video below.
+<div class="embed-responsive embed-responsive-16by9 margin-small">
+    <iframe src="https://www.youtube.com/embed/v17DMiFHnB8" 
+            allowfullscreen></iframe>
+</div>
+Chad is talking about move from monolith to microservices architecture they did in Wunderlist. When
+defining microservices they put constraint on service size. In Wunderlist size of newly created
+service should fit on one screen. This is quite radical, but it works for them based on the Chad&#39;s
+talk. To be able to bootstrap services quickly they have created microservice template so creating
+new service is as easy as clonning it from template and adding some business logic. So I thought
+that this is quite useful.</p>
+
+<h3>Microservices in my current project</h3>
+
+<p>I use microservices in my current project as well. We don&#39;t have any specific constraint on service
+size. We just try to be pragmatic and when it grows too large we extract smaller services. Anyway
+we end up creating services very often. And since we mostly use the same set of components to build
+service we waste a lot of time on task which may be automated in the same way Chad did it.</p>
+
+<h3>Grunt-init approach</h3>
+
+<p>There is already a tool for that, that use node.js. It&#39;s called <a href="http://gruntjs.com/project-scaffolding">grunt-init</a>.
+and you can use it to bootstrap different kinds of projects. This is an example how you use it to
+bootstrap C# project: <a href="https://github.com/nosami/grunt-init-csharpsolution">grunt-init-csharpsolution</a>.
+Grunt-init just ask you for values needed to bootstrap project and then rename files and replace
+values in solution directory. That&#39;s easy. But due to the variable replacement format </p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-xml" data-lang="feed.xml">1</code></pre></div></td><td class="code"><div class="highlight"><pre>{%= nametoreplace %}
+</pre></div>
+</td></tr></table>
+
+<p>you cannot open template solution in Visual Studio since replacement value contains some illegal
+C# characters. And I have found really convenient to be able to edit template in Visual Studio so yoou
+don&#39;t have to mess with csproj, sln files.</p>
+
+<h3>Poor man&#39;s powershell grunt-init replacement</h3>
+
+<p>To be able to open template in Visual Studio. I have used PROJECT_NAME as a variable replacement key 
+and in connection with simple PowerShell script you can do the same thing. Below you can see how it 
+works in practice.
+<img class="img-responsive center-block padding-small" src="/img/poormansgruntinit/powershell-init-csharp-web.gif" alt="Poor man's powershell grunt-init" />
+You can check out example source code on <a href="https://github.com/jmalczak/powershell-init-csharp-web">here</a> 
+on github. Feel free to fork and and make your own changes. </p>
+
+    </div>
+</article>
+
+<div>
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_shortname = 'blogmalczaknet'; 
+    (function () {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    (function () {
+        var s = document.createElement('script');
+        s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+</div>
+
+
+    </div>
+</main>
+
+    <footer class="footer">
+    <div class="copyright">
+        Proudly published with <a class="icon-ghost" href="http://jekyllrb.com/">Jekyll, Grunt, RequireJs and many more.</a>
+    </div>
+    <div class="social-icons">
+        
+        <a href="http://twitter.com/malczu">
+        <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fa fa-twitter fa-stack-1x"></i>
+        </span>
+        </a>
+           
+        <a href="http://github.com/jmalczak">
+        <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fa fa-github fa-stack-1x"></i>
+        </span>
+        </a>
+         
+        <a href="http://facebook.com/malczu">
+        <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fa fa-facebook fa-stack-1x"></i>
+        </span>
+        </a>
+         
+        <a href="https://www.linkedin.com/in/jakubmalczak">
+        <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fa fa-linkedin fa-stack-1x"></i>
+        </span>
+        </a>
+        
+    </div>
+    <div class="clearfix"></div>
+</footer>
+
+    
+      <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-58175776-1', 'auto');
+  ga('send', 'pageview');
+</script>
+    
+  </body>
+</html>
