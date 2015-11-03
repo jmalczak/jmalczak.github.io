@@ -4,7 +4,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://developerabroad.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://developerabroad.com/" />
-<updated>2015-11-03T19:41:23+09:00</updated>
+<updated>2015-11-03T19:52:37+09:00</updated>
 <id>http://developerabroad.com/</id>
 <author>
   <name>Jakub Malczak</name>
@@ -15,8 +15,8 @@
 
 <entry>
   <title type="html"><![CDATA[Setting ASP.NET application auto start from powershell.]]></title>
-  <link rel="alternate" type="text/html" href="http://developerabroad.com/programming/c%23/asp.net/2015/11/03/setting-asp-net-autostart-from-powershell/"/>
-  <id>http://developerabroad.com/programming/c%23/asp.net/2015/11/03/setting-asp-net-autostart-from-powershell</id>
+  <link rel="alternate" type="text/html" href="http://developerabroad.com/2015/11/03/setting-asp-net-autostart-from-powershell.html"/>
+  <id>http://developerabroad.com/2015/11/03/setting-asp-net-autostart-from-powershell</id>
   <published>2015-11-03T00:00:00+09:00</published>
   <updated>2015-11-03T00:00:00+09:00</updated>
   <author>
@@ -114,7 +114,7 @@ Octopus Library tasks to your Octopus Deployment installation. To do that, visit
 deployment server.&lt;/p&gt;
 
   
-  &lt;p&gt;&lt;a href=&quot;http://developerabroad.com/programming/c%23/asp.net/2015/11/03/setting-asp-net-autostart-from-powershell/&quot;&gt;Setting ASP.NET application auto start from powershell.&lt;/a&gt; was originally published by Jakub Malczak at &lt;a href=&quot;http://developerabroad.com&quot;&gt;Developer Abroad&lt;/a&gt; on November 03, 2015.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://developerabroad.com/2015/11/03/setting-asp-net-autostart-from-powershell.html&quot;&gt;Setting ASP.NET application auto start from powershell.&lt;/a&gt; was originally published by Jakub Malczak at &lt;a href=&quot;http://developerabroad.com&quot;&gt;Developer Abroad&lt;/a&gt; on November 03, 2015.&lt;/p&gt;</content>
 </entry>
 
 
