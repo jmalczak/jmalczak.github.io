@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Developer Abroad - Setting ASP.NET application auto start from powershell.</title>
+    <meta name="description" content="How to set ASP.NET application auto start from powershell script which may be used during deployment" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link type="text/plain" rel="author" href="/humans.txt" />
+    <link rel="stylesheet" href="/css/main.css">
+    
+    <script data-main="/js/shared/main" src="/_bower_components/requirejs/require.js"></script>
+    
+    <!--
+      Nice that someone is reading the markup. If you would like to hire me, or you need people for
+      any cool project. Please don't hesitate to contact me. To get my e-mail address, please open 
+      JavaScript console and run function getDetails();
+
+      Best regards
+    -->
+  </head>
+  <body>
+  <div class="ribbon-left">Currently in<br/><b>Busan, South Korea</b></div>
+    <main id="page-content" class="page-content">
+    <nav class="top" id="menu-mobile-open" >
+    <div id="nav-wrapper">
+        <div class="menu-mobile-toggle">
+            <a href="#menu-mobile-open" class="menu-mobile-open"><span><i class="fa fa-bars"></i></span></a>
+            <a id="menu-mobile-close" href="#menu-mobile-close" class="menu-mobile-close"><span><i class="fa fa-times"></i></span></a>
+        </div>
+        <div id="nav-menu-wrapper">
+            <div id="site-name">
+                <a href="http://developerabroad.com">
+                    { developer : '<span class="accent">abroad</span>' }
+                </a>
+            </div>
+            <ul class="navbar">
+                <li><a href="http://developerabroad.com">HOME</a></li>
+                <li><a href="http://developerabroad.com/#page-content">POSTS</a></li>
+                <li><a href="http://developerabroad.com/map/">PLACES</a></li>
+                <li><a href="http://developerabroad.com/about/">ABOUT</a></li>
+                <li><a href="/feed.xml">NEWS FEED</a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</nav>
+
+    <div class="container">
+        <article>
+    <header>
+        <div>
+            <h1>Setting ASP.NET application auto start from powershell.</h1>
+            <p>by <strong>Jakub Malczak</strong> &#8212;
+            
+             <strong><time datetime="2015-11-03T00:00:00+09:00">03 Nov 2015</time></strong>
+            </p>
+        </div>
+    </header>
+    <div>
+        <h3>Why it takes so long</h3>
+
+<p>We all know the feeling when we load our ASP.NET app for the first time, and it takes much longer
+to execute than the following requests. That is caused by all the things we put to Application_Start
+in Global.asax. We all know that this method will be called when first request hits our application,
+so we use it as a good place to initialize our app. This makes it much slower to access for the first
+time. </p>
+
+<h3>One way of solving the problem</h3>
+
+<p>Many people were trying to solve the problem by themselves by scheduling calls to website to invoke
+this first request and warm up application. This wasn&#39;t the most elegant solution since you have to
+take under the consideration your application pool recycle time, also when your app pool crash IIS
+it may not be wormed up because your scheduler doesn&#39;t know about it. </p>
+
+<h3>There is a better way in ASP.NET 4</h3>
+
+<p>Microsoft team included auto start feature in ASP.NET 4. You can read more about it in this article by
+Scott Guthrie <a href="http://weblogs.asp.net/scottgu/auto-start-asp-net-applications-vs-2010-and-net-4-0-series">Auto-Start ASP.NET Applications (VS 2010 and .NET 4.0 Series)</a>. You just
+need to configure your IIS in specific way and add implementation of IProcessHostPreloadClient interface
+which will contain your warm up code. </p>
+
+<h3>What if you are lazy and you want to use PowerShell to configure your website to auto start</h3>
+
+<p>You still need to implement IProcessHostPreloadClient in your application. Then can use following
+PowerShell code to configure your website. First you need to change your app pool start mode to
+AlwaysRunning.</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-powershell" data-lang="powershell">1
+2
+3
+4
+5
+6</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># This adds IIS manipulation snap in</span>
+<span class="nb">Add-PSSnapin</span> <span class="n">WebAdministration</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+<span class="nb">Import-Module</span> <span class="n">WebAdministration</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+
+<span class="c"># Setting application pool AlwaysRunning where $appPoolName is name of our app pool</span>
+<span class="nb">Set-ItemProperty</span> <span class="s2">&quot;IIS:\AppPools\$appPoolName&quot;</span> <span class="n">-Name</span> <span class="n">startMode</span> <span class="n">-Value</span> <span class="n">AlwaysRunning</span>
+</pre></div>
+</td></tr></table>
+
+<p>Now our app pool will be always running, but this won&#39;t change much in case of our first request
+start up time. We have to make sure that after app pool start our warm up code will be invoked. So
+we have to add auto start provider as it&#39;s explained in Scott article:</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-powershell" data-lang="powershell">1
+2
+3</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># Adding new auto start provider where $serviceName is unique name of our provider and $serviceType</span>
+<span class="c"># is type that implements our provider</span>
+<span class="nb">Add-WebConfiguration</span> <span class="n">-filter</span> <span class="p">/</span><span class="n">system</span><span class="p">.</span><span class="n">applicationHost</span><span class="p">/</span><span class="n">serviceAutoStartProviders</span> <span class="n">-Value</span> <span class="p">@{</span><span class="n">name</span><span class="p">=</span><span class="nv">$serviceName</span><span class="p">;</span> <span class="n">type</span><span class="p">=</span><span class="nv">$serviceType</span><span class="p">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>At the end we have to tell our web application to use configured auto start provider.</p>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><code class="language-powershell" data-lang="powershell">1
+2
+3
+4
+5</code></pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># Set web site auto start enabled where $webSiteName is our web site name</span>
+<span class="nb">Set-ItemProperty</span> <span class="s2">&quot;IIS:\Sites\$webSiteName&quot;</span> <span class="n">-Name</span> <span class="n">applicationDefaults</span><span class="p">.</span><span class="n">serviceAutoStartEnabled</span> <span class="n">-Value</span> <span class="n">True</span>
+<span class="c"># Set web site auto start provider where $webSiteName is our web site name and $serviceName is name configured</span>
+<span class="c"># in previous step</span>
+<span class="nb">Set-ItemProperty</span> <span class="s2">&quot;IIS:\Sites\$webSiteName&quot;</span> <span class="n">-Name</span> <span class="n">applicationDefaults</span><span class="p">.</span><span class="n">serviceAutoStartEnabled</span> <span class="n">-Value</span> <span class="nv">$serviceName</span>
+</pre></div>
+</td></tr></table>
+
+<p>Now you can go to your IIS Manager and confirm that all settings have been applied correctly. Now
+when your app pool will be recycled, code you put in implementation of IProcessHostPreloadClient will
+be executed to warm up your application.</p>
+
+<h3>What if I use Octopus Deployment</h3>
+
+<p>If you use Octopus Deployment (and you should, since it&#39;s great piece of software) you can import
+Octopus Library tasks to your Octopus Deployment installation. To do that, visit <a href="https://github.com/OctopusDeploy/Library/tree/master/step-templates">Octopus Library</a> and download following templates:</p>
+
+<ul>
+<li>iis-apppool-update-property.json</li>
+<li>iis-website-update-property.json</li>
+<li>iis-autostartprovider-add.json</li>
+</ul>
+
+<p>After importing them you can set web site, app pool and auto start provider settings directly from your
+deployment server.</p>
+
+    </div>
+</article>
+
+<div>
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_shortname = 'blogmalczaknet'; 
+    (function () {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    (function () {
+        var s = document.createElement('script');
+        s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+</div>
+
+
+    </div>
+</main>
+
+    <footer class="footer">
+    <div class="copyright">
+        Proudly published with <a class="icon-ghost" href="http://jekyllrb.com/">Jekyll, Grunt, RequireJs and many more.</a>
+    </div>
+    <div class="social-icons">
+        
+        <a href="http://twitter.com/malczu">
+        <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fa fa-twitter fa-stack-1x"></i>
+        </span>
+        </a>
+           
+        <a href="http://github.com/jmalczak">
+        <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fa fa-github fa-stack-1x"></i>
+        </span>
+        </a>
+         
+        <a href="http://facebook.com/malczu">
+        <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fa fa-facebook fa-stack-1x"></i>
+        </span>
+        </a>
+         
+        <a href="https://www.linkedin.com/in/jakubmalczak">
+        <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+        <i class="fa fa-linkedin fa-stack-1x"></i>
+        </span>
+        </a>
+        
+    </div>
+    <div class="clearfix"></div>
+</footer>
+
+    
+      <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-58175776-1', 'auto');
+  ga('send', 'pageview');
+</script>
+    
+  </body>
+</html>

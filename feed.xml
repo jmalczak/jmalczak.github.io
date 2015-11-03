@@ -4,13 +4,118 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://developerabroad.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://developerabroad.com/" />
-<updated>2015-10-22T11:16:36+09:00</updated>
+<updated>2015-11-03T19:41:23+09:00</updated>
 <id>http://developerabroad.com/</id>
 <author>
   <name>Jakub Malczak</name>
   <uri>http://developerabroad.com/</uri>
   <email>jmalczak@gmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Setting ASP.NET application auto start from powershell.]]></title>
+  <link rel="alternate" type="text/html" href="http://developerabroad.com/programming/c%23/asp.net/2015/11/03/setting-asp-net-autostart-from-powershell/"/>
+  <id>http://developerabroad.com/programming/c%23/asp.net/2015/11/03/setting-asp-net-autostart-from-powershell</id>
+  <published>2015-11-03T00:00:00+09:00</published>
+  <updated>2015-11-03T00:00:00+09:00</updated>
+  <author>
+    <name>Jakub Malczak</name>
+    <uri>http://developerabroad.com</uri>
+    <email>jmalczak@gmail.com</email>
+  </author>
+  
+  <content type="html">
+  
+    &lt;h3&gt;Why it takes so long&lt;/h3&gt;
+
+&lt;p&gt;We all know the feeling when we load our ASP.NET app for the first time, and it takes much longer
+to execute than the following requests. That is caused by all the things we put to Application_Start
+in Global.asax. We all know that this method will be called when first request hits our application,
+so we use it as a good place to initialize our app. This makes it much slower to access for the first
+time. &lt;/p&gt;
+
+&lt;h3&gt;One way of solving the problem&lt;/h3&gt;
+
+&lt;p&gt;Many people were trying to solve the problem by themselves by scheduling calls to website to invoke
+this first request and warm up application. This wasn&amp;#39;t the most elegant solution since you have to
+take under the consideration your application pool recycle time, also when your app pool crash IIS
+it may not be wormed up because your scheduler doesn&amp;#39;t know about it. &lt;/p&gt;
+
+&lt;h3&gt;There is a better way in ASP.NET 4&lt;/h3&gt;
+
+&lt;p&gt;Microsoft team included auto start feature in ASP.NET 4. You can read more about it in this article by
+Scott Guthrie &lt;a href=&quot;http://weblogs.asp.net/scottgu/auto-start-asp-net-applications-vs-2010-and-net-4-0-series&quot;&gt;Auto-Start ASP.NET Applications (VS 2010 and .NET 4.0 Series)&lt;/a&gt;. You just
+need to configure your IIS in specific way and add implementation of IProcessHostPreloadClient interface
+which will contain your warm up code. &lt;/p&gt;
+
+&lt;h3&gt;What if you are lazy and you want to use PowerShell to configure your website to auto start&lt;/h3&gt;
+
+&lt;p&gt;You still need to implement IProcessHostPreloadClient in your application. Then can use following
+PowerShell code to configure your website. First you need to change your app pool start mode to
+AlwaysRunning.&lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-powershell&quot; data-lang=&quot;powershell&quot;&gt;1
+2
+3
+4
+5
+6&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# This adds IIS manipulation snap in&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Add-PSSnapin&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WebAdministration&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;-ErrorAction&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SilentlyContinue&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Import-Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WebAdministration&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;-ErrorAction&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SilentlyContinue&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Setting application pool AlwaysRunning where $appPoolName is name of our app pool&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Set-ItemProperty&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;IIS:\AppPools\$appPoolName&amp;quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;-Name&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;startMode&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;-Value&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AlwaysRunning&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Now our app pool will be always running, but this won&amp;#39;t change much in case of our first request
+start up time. We have to make sure that after app pool start our warm up code will be invoked. So
+we have to add auto start provider as it&amp;#39;s explained in Scott article:&lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-powershell&quot; data-lang=&quot;powershell&quot;&gt;1
+2
+3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Adding new auto start provider where $serviceName is unique name of our provider and $serviceType&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# is type that implements our provider&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Add-WebConfiguration&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;-filter&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;system&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;applicationHost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;serviceAutoStartProviders&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;-Value&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;@{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$serviceName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$serviceType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;At the end we have to tell our web application to use configured auto start provider.&lt;/p&gt;
+
+&lt;table class=&quot;highlighttable&quot;&gt;&lt;tr&gt;&lt;td class=&quot;linenos&quot;&gt;&lt;div class=&quot;linenodiv&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-powershell&quot; data-lang=&quot;powershell&quot;&gt;1
+2
+3
+4
+5&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Set web site auto start enabled where $webSiteName is our web site name&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Set-ItemProperty&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;IIS:\Sites\$webSiteName&amp;quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;-Name&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;applicationDefaults&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;serviceAutoStartEnabled&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;-Value&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;True&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Set web site auto start provider where $webSiteName is our web site name and $serviceName is name configured&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# in previous step&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;Set-ItemProperty&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;IIS:\Sites\$webSiteName&amp;quot;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;-Name&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;applicationDefaults&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;serviceAutoStartEnabled&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;-Value&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$serviceName&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+
+&lt;p&gt;Now you can go to your IIS Manager and confirm that all settings have been applied correctly. Now
+when your app pool will be recycled, code you put in implementation of IProcessHostPreloadClient will
+be executed to warm up your application.&lt;/p&gt;
+
+&lt;h3&gt;What if I use Octopus Deployment&lt;/h3&gt;
+
+&lt;p&gt;If you use Octopus Deployment (and you should, since it&amp;#39;s great piece of software) you can import
+Octopus Library tasks to your Octopus Deployment installation. To do that, visit &lt;a href=&quot;https://github.com/OctopusDeploy/Library/tree/master/step-templates&quot;&gt;Octopus Library&lt;/a&gt; and download following templates:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;iis-apppool-update-property.json&lt;/li&gt;
+&lt;li&gt;iis-website-update-property.json&lt;/li&gt;
+&lt;li&gt;iis-autostartprovider-add.json&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;After importing them you can set web site, app pool and auto start provider settings directly from your
+deployment server.&lt;/p&gt;
+
+  
+  &lt;p&gt;&lt;a href=&quot;http://developerabroad.com/programming/c%23/asp.net/2015/11/03/setting-asp-net-autostart-from-powershell/&quot;&gt;Setting ASP.NET application auto start from powershell.&lt;/a&gt; was originally published by Jakub Malczak at &lt;a href=&quot;http://developerabroad.com&quot;&gt;Developer Abroad&lt;/a&gt; on November 03, 2015.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
